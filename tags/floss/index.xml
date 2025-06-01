@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>FLOSS on ausectj</title>
+    <link>http://localhost:1313/tags/floss/</link>
+    <description>Recent content in FLOSS on ausectj</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 31 May 2025 17:20:26 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/floss/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why I Made This Website</title>
+      <link>http://localhost:1313/posts/why-i-made-this-website/</link>
+      <pubDate>Sat, 31 May 2025 17:20:26 -0400</pubDate>
+      <guid>http://localhost:1313/posts/why-i-made-this-website/</guid>
+      <description>&lt;p&gt;I haven&amp;rsquo;t always wanted my own website. In fact, I was long convinced that creating my own website would be a waste of time and effort.&#xA;Anyone can create a Linkedin profile in less than an hour. On the other hand, it might take tens of hours to get your personal website to a point that&#xA;employers just might be impressed by.&lt;/p&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;My first exploration into web development was through an unpaid virtual internship that I took on for a small laundromat in LA after high school.&#xA;The laundromat was run by a single guy with dreams of a low-maintanence, passive income stream in the form of this laundromat. He had a few employees,&#xA;but was generally hell-bent on reducing costs and raising income with as little effort as possible. The point of the internship was to bring in cheap labor&#xA;to help market the business and increase revenues.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
