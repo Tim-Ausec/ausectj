@@ -6,7 +6,14 @@
     <description>Recent content in Posts on ausectj</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate></lastBuildDate>
+    <lastBuildDate>Sat, 21 Jun 2025 20:40:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why I Made This Website</title>
+      <link>http://localhost:1313/posts/why-i-made-this-website/</link>
+      <pubDate>Sat, 21 Jun 2025 20:40:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/why-i-made-this-website/</guid>
+      <description>&lt;p&gt;I haven&amp;rsquo;t always wanted my own website. In fact, I was long convinced that&#xA;creating my own website would be a waste of time and effort. This article&#xA;documents the reasons why I took the jump.&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>
