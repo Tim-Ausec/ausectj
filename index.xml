@@ -2,18 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ausectj</title>
-    <link>https://ausectj.com/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on ausectj</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 21 Jun 2025 20:40:00 +0000</lastBuildDate>
-    <atom:link href="https://ausectj.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Jul 2025 14:14:25 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go to Recipies</title>
+      <link>http://localhost:1313/posts/go-to-recipies/</link>
+      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
+      <guid>http://localhost:1313/posts/go-to-recipies/</guid>
+      <description>&lt;p&gt;This article keeps track of my go-to dishes.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Why I Made This Website</title>
-      <link>https://ausectj.com/posts/why-i-made-this-website/</link>
+      <link>http://localhost:1313/posts/why-i-made-this-website/</link>
       <pubDate>Sat, 21 Jun 2025 20:40:00 +0000</pubDate>
-      <guid>https://ausectj.com/posts/why-i-made-this-website/</guid>
+      <guid>http://localhost:1313/posts/why-i-made-this-website/</guid>
       <description>&lt;p&gt;I haven&amp;rsquo;t always wanted my own website. In fact, I was long convinced that&#xA;creating my own website would be a waste of time and effort. This article&#xA;documents the reasons why I took the jump.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Starting My Career in College</title>
+      <link>http://localhost:1313/posts/starting-my-career-in-college/</link>
+      <pubDate>Sun, 01 Jun 2025 09:25:39 -0400</pubDate>
+      <guid>http://localhost:1313/posts/starting-my-career-in-college/</guid>
+      <description>&lt;p&gt;My first exploration into web development was through an unpaid virtual internship that I took on for a small laundromat in LA after high school.&#xA;The laundromat was run by a single guy with dreams of a low-maintanence, passive income stream in the form of this laundromat. He had a few employees,&#xA;but was generally hell-bent on reducing costs and raising income with as little effort as possible. The point of the internship was to bring in cheap labor&#xA;to help market the business and increase revenues.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How I Made This Website</title>
+      <link>http://localhost:1313/posts/how-i-made-this-website/</link>
+      <pubDate>Sat, 31 May 2025 17:12:33 -0400</pubDate>
+      <guid>http://localhost:1313/posts/how-i-made-this-website/</guid>
+      <description>&lt;p&gt;This article documents how I initially made this website.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
