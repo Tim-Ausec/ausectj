@@ -15,12 +15,5 @@
       <guid>http://localhost:1313/categories/self-centered/</guid>
       <description></description>
     </item>
-    <item>
-      <title>Web Dev</title>
-      <link>http://localhost:1313/categories/web-dev/</link>
-      <pubDate>Sat, 31 May 2025 17:12:33 -0400</pubDate>
-      <guid>http://localhost:1313/categories/web-dev/</guid>
-      <description></description>
-    </item>
   </channel>
 </rss>
