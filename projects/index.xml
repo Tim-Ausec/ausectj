@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on Tim Ausec</title>
-    <link>https://ausectj.com:1313/projects/</link>
+    <link>https://ausectj.com/projects/</link>
     <description>Recent content in Projects on Tim Ausec</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 17 Sep 2025 23:28:00 -0400</lastBuildDate>
-    <atom:link href="https://ausectj.com:1313/projects/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ausectj.com/projects/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Agrovolo</title>
-      <link>https://ausectj.com:1313/projects/agrovolo/</link>
+      <link>https://ausectj.com/projects/agrovolo/</link>
       <pubDate>Wed, 17 Sep 2025 23:28:00 -0400</pubDate>
-      <guid>https://ausectj.com:1313/projects/agrovolo/</guid>
-      <description>&lt;figure&gt;&lt;img src=&#34;https://ausectj.com:1313/images/Agrovolo_Prototype.png&#34;&#xA;    alt=&#34;Agrovolo Picture&#34; width=&#34;500&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;Agrovolo is a one-stop-shop solution for aerial imaging data targeted at agriculture / land management use cases.&lt;/p&gt;</description>
+      <guid>https://ausectj.com/projects/agrovolo/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/Agrovolo_Prototype.png&#34;&#xA;    alt=&#34;Agrovolo Picture&#34; width=&#34;500&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;Agrovolo is a one-stop-shop solution for aerial imaging data targeted at agriculture / land management use cases.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
