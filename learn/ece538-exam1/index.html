@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ECE538 Exam 1</title>
+	
+	
+	<link rel="stylesheet" href="/css/style.css">
+	
+	
+    	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['$$', '$$']],  
+      inlineMath: [['$', '$']]                  
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+	
+</head>
+<body>
+	<header>
+	<nav>
+	
+	<a class = "logo" href="https://ausectj.com/">
+    	<img src="/images/Ion_Engine_Dark.png" alt="Home" width = "75" height = "100">
+	</a>
+	
+			
+			<a href="/learn">Learn</a>
+			
+			<a href="/posts">Posts</a>
+			
+			<a href="/projects">Projects</a>
+			
+	</nav>
+	
+	<hr>
+</header>
+
+	
+	<main>
+		<article>
+			<h1>ECE538 Exam 1</h1>
+			<time datetime="2025-07-13T14:14:25">13.07.2025 14:14</time>
+			<div>
+				<p>Topics and concepts covered in the first 5 weeks of ECE538 at Purdue University.</p>
+<h1 id="week-1-dt-signals-and-systems-basics">Week 1: DT Signals and Systems Basics</h1>
+<p>The purpose of this week was to easily slide into the course material and work with convolution in the discrete time case.</p>
+<h2 id="sampling-basics">Sampling (basics)</h2>
+<p>Sampling is the process of converting a continuous time signal into a discrete time signal. The sampling done in this course is all even-width sampling, which means</p>
+$$x[n]\overset{\Delta}{=}x(nT_s) \forall n \in \mathbb{Z}$$<p>Where $T_s$ is called the sampling period, with a corresponding $f_s = \frac{1}{T_s}$ as the sampling frequency.</p>
+<h2 id="special-signals">Special Signals</h2>
+<p>Common signals to work with are:</p>
+<h3 id="unit-step">Unit step:</h3>
+$$ 
+    u[n-n_0] = \begin{cases} 
+          0 & n < n_0 \\
+          1 & n\geq n_0 \\
+       \end{cases}
+$$<h3 id="dt-impulse">DT Impulse:</h3>
+$$ 
+    \delta[n-n_0] = \begin{cases} 
+          0 & n \neq n_0 \\
+          1 & n = n_0 \\
+       \end{cases}
+$$<h3 id="geometric">Geometric:</h3>
+<p>$x(t)=e^{-\frac{t}{\tau}}u(t)$ is the eigenfunction of all LTI systems. This makes it a very important function in continuous time systems.</p>
+<p>The geometric sequence is the equivalent of the exponential function in discrete time systems.
+</p>
+$$x[n]=x(nT_s)=e^{-\frac{nT_s}{\tau}}u(nT_s)=(e^{-\frac{T_s}{\tau}})^{n}u[n]=a^nu[n]$$$$x[n]=a^nu[n]$$<h3 id="dt-sine-wave">DT Sine Wave:</h3>
+$$x[n]=e^{j\omega_0 n}$$<p>Properties:</p>
+<ol>
+<li>Aliasing
+$$e^{j(\omega_0 + 2\pi k)n}=e^{j\omega_0 n}$$</li>
+<li>Periodicity:</li>
+</ol>
+<p>2a. Condition on Periodicity
+</p>
+$$e^{j\omega_0(n+N)}=e^{j\omega_0 n} \iff \frac{\omega_0}{2\pi} \in \mathbb{Q}$$<p>2b. Fundamental Period
+</p>
+$$x[n] = x[n+kN_0] e^{j\omega_0(n+N)}=e^{j\omega_0 n} \iff \frac{\omega_0}{2\pi} \in \mathbb{Q}$$<h2 id="convolution">Convolution</h2>
+<p>Convolution in discrete time is defined as</p>
+$$x[n]*h[n]=\sum_{k=-\infty}^{\infty}x[k]h[n-k]=\sum_{k=-\infty}^{\infty}h[k]x[n-k]$$<p>LTI systems operate on the input by convolution of the impulse response. This can be shown with the below approach:</p>
+$$y[n]=T\{x[n]\}=T\{\sum_{k=-\infty}^{\infty}x[k]\delta[n-k]\}=\sum_{k=-\infty}^{\infty}x[k]T\{\delta[n-k]\}=\sum_{k=-\infty}^{\infty}x[k]h[n-k]=x[n]*h[n]$$<h3 id="methods-of-convolution">Methods of Convolution</h3>
+<ol>
+<li>Directly apply the formula</li>
+<li>Graphical convolution</li>
+</ol>
+<figure><img src="/images/Graphical_Convolution.png"
+    alt="Steps for graphical convolution" width="500">
+</figure>
+
+<h3 id="properties-of-convolution">Properties of Convolution</h3>
+<ol>
+<li>Associative</li>
+<li>Commutative</li>
+<li>Distributive</li>
+</ol>
+<h1 id="week-2-autocorrelation-and-cross-correlation">Week 2: Autocorrelation and Cross-Correlation</h1>
+<p>This is where new content for the course starts. The purpose of this week was to understand autocorrelation, its properties, and its applicatiions.</p>
+<p>The idea of autocorrelation is to see if a particular signal is embedded in a received signal. This is often used in radar applications, where the received signal is a time-delayed version of the original transmitted signal, with some noise added. Take the below example:</p>
+$$y[n]=\sum_{k=-\infty}^{\infty}a_kx[n-Dk]+w[n]$$<p>Notice the following:</p>
+$$z[n]=y[n]*x^*[-n]=\sum_{k=-\infty}^{\infty}a_kx[n-Dk]*x^*[-n]+w[n]*x^*[-n]$$$$z[n]=\sum_{k=-\infty}^{\infty}a_kx[n]*\delta(n-Dk)*x^*[-n]+w[n]*x^*[-n]$$$$z[n]=\sum_{k=-\infty}^{\infty}a_kx[n]*x^*[-n]*\delta(n-Dk)+w[n]*x^*[-n]$$$$z[n]=\sum_{k=-\infty}^{\infty}a_kr_{xx}[n]*\delta(n-Dk)+w[n]*x^*[-n]$$<p>Now, we define cross-correlation:</p>
+$$r_{xy}[l]=x[l]*y^*[-l]=\sum_{k=-\infty}^{\infty}x[k]y^*[k-l]$$<p>Autocorrelation occurs when $y=x$:</p>
+$$r_{xx}[l]=x[l]*x^*[-l]=\sum_{k=-\infty}^{\infty}x[k]x^*[k-l]$$<p>Thus,</p>
+$$z[n]=\sum_{k=-\infty}^{\infty}a_kr_{xx}[n-Dk]+r_{wx}$$<p>With the appropriate choice of $x[n]$, $r_{xx}[n-Dk]=\delta[n-Dk]$, giving a clear signal that indicates when $x[n-Dk]$ was received.</p>
+<h2 id="properties-of-autocorrelation--useful-tidbits">Properties of Autocorrelation / Useful TidBits</h2>
+<ol>
+<li>Hemertian Symmetry:
+$$r_{xx}[-n]=r_{xx}^*[n]$$
+$$r_{xx}[n]=r_{xx}^*[-n]$$
+Proof:
+$$r_{xx}[-n]=x[-n]*x^*[n]=x^*[n]*x[-n]$$
+$$r_{xx}^*[n]=x^*[n]*x[-n]$$</li>
+<li>Zero property:
+$$|r_{xx}[n]|\leq |r_{xx}[0]| \forall n$$</li>
+<li>DTFT:
+$$\sum_{k=-\infty}^{\infty}r_{xx}[n]e^{-j\omega n} \geq 0, \in \mathbb{R}, \forall \omega$$</li>
+<li>Time Invariance:
+$$x[n]*x^*[-n]=x[n]*x^*[-n]|_{n=n-n_0}$$</li>
+<li>Frequency Shift:
+$$y[n]=e^{j(\omega_0 n + \theta_0)}x[n]\Rightarrow r_{yy}[n]=e^{j\omega_0 n}r_{xx}[n]$$</li>
+<li>LTI Systems:
+$$y[n] = x[n]*h[n] \Rightarrow r_{yy}[n]=r_{xx}[n] * r_{hh}[n]$$</li>
+<li>Geometric Autocorrelation:
+$$x[n] = a^nu[n] \Rightarrow r_{xx}[n]=\frac{1}{1-a^2}a^{|n|}, |a|<1$$</li>
+<li>Autocorrelation in the Frequency Domain (see properties 3 and 4 in the Z-transform properties section):
+$$r_{xx}[n]=x[n]*x^*[-n]\Rightarrow S_{xx}(e^{j\omega})=X(e^{j\omega})X^*(e^{j\omega})=|X(e^{j\omega})|^2$$</li>
+</ol>
+<h1 id="week-3-week-3z-transform--dt-fourier-transform">Week 3: Week 3.Z-Transform &amp; DT Fourier Transform</h1>
+<p>The purpose of this week is to revisit the idea of the Z-transform and DTFT.</p>
+<h2 id="derivation--motivation">Derivation / Motivation</h2>
+<h3 id="z-transform">Z-Transform</h3>
+<p>As stated previously, the geometric series is the eigenfunction for LTI systems in discrete time:</p>
+$$y[n]=h[n]*x[n]=\sum_{k=-\infty}^{\infty}h[k]a^{n-k}=(\sum_{k=-\infty}^{\infty}h[k]a^{-k})a^n=H(a)a^n$$<p>Thus, we define
+</p>
+$$H(z)=Z\{h[n]\}=\sum_{n=-\infty}^{\infty}h[n]z^{-n}$$<h3 id="dtft">DTFT</h3>
+<p>Let $x[n]=e^{j\omega_0 n}$ and pass into LTI system:
+</p>
+$$y[n]=h[n]*x[n]=\sum_{k=-\infty}^{\infty}h[k]e^{j\omega_0(n-k)}=(\sum_{k=-\infty}^{\infty}h[k]e^{-j\omega k})e^{j\omega_0 n}=H(e^{j\omega_0})e^{j\omega_0 n}$$<p>Thus, the DTFT is nothing but evaluating the Z-transform on the unit circle:
+</p>
+$$H(e^{j\omega})=DTFT\{h[n]\}=H(z)|_{z=e^{j\omega}}=\sum_{n=-\infty}^{\infty}h[n]e^{-j\omega_0 n}$$<h2 id="stability">Stability</h2>
+<p>First, express $H(z)$ in terms of poles and zeroes (a relatively unrestrictive assumption, see Difference Equations):
+</p>
+$$H(z)=\frac{\Pi_{k=0}^{M}(z-z_k)}{\Pi_{k=0}^{N}(p-p_k)}$$<p>Notice first that the radius of convergence of $H(z)$ must be given by $|z|>|p_{max}|$, where $p_{max}$ is the pole with the largest magnitude.</p>
+<p>Notice second that the definition of the Z-transform and the triangle inequality obtains:
+</p>
+$$|H(z)|\leq \sum_{n=-\infty}^{\infty}|h[n]z^{-n}|$$<p>We know that BIBO stability requires
+$$$\sum_{n=-\infty}^{\infty}|h[n]| < \infty$</p>
+<p>So evaluate the above at $z=e^{j\omega}$
+</p>
+$$|H(e^{j\omega})|\leq \sum_{n=-\infty}^{\infty}|h[n]|<\infty$$<p>This means that the radius of convergence must include the unit circle. Since $|z_{max}|=1>|p_{max}|$, this means that in order for a system to be BIBO stable, all poles must be within the unit circle.</p>
+<h2 id="difference-equations">Difference Equations</h2>
+<p>A difference equation is the DT analogy to a CT differential equation. They are given in the below form:</p>
+$$y[n]=\sum_{k=0}^{M}a_kx[n-k]-\sum_{k=1}^{N}b_ky[n-k]$$<h3 id="simple-analysis">Simple Analysis</h3>
+<p>Taking the Z-transform of both sides:
+</p>
+$$Y(z)=\sum_{k=0}^{M}a_kX(z)z^{-k}-\sum_{k=1}^{N}b_kY(z)z^{-k}$$<p>Solving for $H(z)=\frac{Y(z)}{X(z)}$:</p>
+$$H(z)=\frac{\sum_{k=0}^{M}a_kz^{-k}}{1+\sum_{k=1}^{N}b_kz^{-k}}$$<p>From here, pole-zero analysis can be performed.</p>
+<h3 id="fir-iir">FIR, IIR</h3>
+<p>Finite impulse response (FIR) systems often take the following form:</p>
+$$y[n]=\sum_{k=0}^{M}a_kx[n-k]$$<p>As can be seen:</p>
+$$h[n]=\sum_{k=0}^{M}a_k\delta[n-k]$$<p>.</p>
+<p>$\fbox{The defining characteristic of FIR systems is that they have no (nonzero) poles, only zeros.}$</p>
+<p>Infinite impulse response (IIR) systems take the form of a general difference equation. $\fbox{If a system has a nonzero pole, it is IIR.}$</p>
+<p>The names of both types come from the length of time it takes for the impulse response to stay at 0. This never happens for IIRs, and always happens for FIRs.</p>
+<h2 id="pole-zero-analysis">Pole-Zero Analysis</h2>
+<p>It is useful to be able to look at just $|H(z)|$ or $\angle H(z)$ for any given $z$. Since $H(z)$ can usually be written as a rational function of polynomials, this analysis is not difficult if we understand complex numbers.</p>
+$$H(z)=\frac{\Pi_{k=0}^{M}(z-z_k)}{\Pi_{k=0}^{N}(p-p_k)}$$$$|H(z)|=\frac{\Pi_{k=0}^{M}|z-z_k|}{\Pi_{k=0}^{N}|p-p_k|}$$<p>
+</p>
+$$\angle H(z)=\Pi_{k=0}^{M}\angle(z-z_k)-\Pi_{k=0}^{N}\angle(p-p_k)$$<p>This can be easily programmed and calculated.</p>
+<h2 id="properties--useful-tidbits">Properties / Useful TidBits</h2>
+<ol>
+<li>Time shifting
+$$Z\{x[n-n_0]\}=z^{-n_0}X(z)$$</li>
+<li>Convolution
+$$Z\{x[n]*h[n]\}=X(z)H(z)$$</li>
+<li>Conjugation
+$$Z\{x^*[n]\}=X^*(z^*)$$</li>
+<li>Time-Reversal
+$$Z\{x[-n]\}=X(\frac{1}{z})$$</li>
+<li>Geometric Sequence
+$$Z\{a^nu[n]\}=\frac{z}{z-a} \forall |z|>|a|$$</li>
+<li>Derivative in Z-domain
+$$Z\{nx[n]\}=-z\frac{d}{dz}X(z)$$</li>
+<li>Domain Stretch in Z-domain
+$$Z\{a^nx[n]\}=X(\frac{z}{a})$$</li>
+</ol>
+<h1 id="week-4-frequency-response-of-lti-systems">Week 4: Frequency Response of LTI Systems</h1>
+<p>The purpose of this week was to understand how pole/zero placement of the impulse response can affect the frequency response of an LTI system.</p>
+<h2 id="all-pass-filter">All-Pass Filter</h2>
+<h3 id="basic-analysis">Basic Analysis</h3>
+<p>All-pass filters have the below impulse response:
+</p>
+$$H(e^{j\omega})=G\frac{e^{j\omega}-\frac{1}{p^*}}{e^{j\omega}-p}$$<p>Proof:
+</p>
+$$G\frac{e^{j\omega}-\frac{1}{p^*}}{e^{j\omega}-p}=G\frac{-\frac{e^{j\omega}}{p^*}(e^{-j\omega}-p^*)}{e^{j\omega}-p}=G\frac{-\frac{e^{j\omega}}{p^*}(e^{j\omega}-p)^*}{e^{j\omega}-p}$$<p>
+Therefore
+</p>
+$$|H(e^{j\omega})|=|G|\frac{|-\frac{e^{j\omega}}{p^*}||(e^{j\omega}-p)^*|}{|e^{j\omega}-p|}=\frac{|G|}{|p|}, \forall \omega$$<p>
+Which is an all-pass filter. Notice that $|G|=|p|$ normalizes the all-pass.</p>
+<h3 id="connection-to-autocorrelation">Connection to Autocorrelation</h3>
+<p>Recall that
+</p>
+$$DTFT\{r_{hh}[n]\}=|H(e^{j\omega})|^2=(\frac{|G|}{|p|})^2$$<p>
+Therefore
+</p>
+$$h[n]*h^*[-n]=(\frac{|G|}{|p|})^2\delta[n]$$<h3 id="time-domain">Time-Domain</h3>
+$$H(z)=p\frac{z-\frac{1}{p^*}}{z-p}=p\frac{z}{z-p}-\frac{p}{p^*}z^{-1}\frac{z}{z-p}$$<p>Thus</p>
+$$h[n]=pp^nu[n]-e^{j2\angle p}p^{n-1}u[n-1]$$<p>A more common expression can be obtained with further manipulation:</p>
+$$=p\delta[n]+pp^nu[n-1]-\frac{e^{j2\angle p}}{p}p^nu[n-1]=p\delta[n]+(p-\frac{e^{j2\angle p}}{p})p^nu[n-1]=p\delta[n]+(p-\frac{e^{j2\angle p}}{p})p^{n}u[n] - (p-\frac{e^{j2\angle p}}{p})\delta[n]=\frac{e^{j2\angle p}}{p}\delta[n]+(\frac{p^2-e^{j2\angle p}}{p})p^{n}u[n]$$<p>Obtaining</p>
+$$h[n]=\frac{1}{p}(e^{j2\angle p}\delta[n]+(p^2-e^{j2\angle p})p^{n}u[n])$$<p>Notice that if $p \in \mathbb{R}$
+</p>
+$$\boxed{h[n]=\frac{1}{p}(\delta[n]+(p^2-1)p^{n}u[n])}$$<h2 id="notch-filter">Notch Filter</h2>
+<p>Nothced filters have the following impulse response:
+</p>
+$$H(e^{j\omega})=G\frac{\Pi_{k=0}^{M}(e^{j\omega}-e^{j\omega_{k}})}{\Pi_{k=0}^{M}(e^{j\omega}-re^{j\omega_{k}})}$$<p>The key is that the zeros lie on the unit circle at the frequencies that are notched out. The poles create a contrast between the surrounding frequencies and the notched frequencies. The closer the poles are to the unit circle, the narrower the notching is.</p>
+<h2 id="notch-filter-and-all-pass-filter-connection">Notch Filter and All-Pass Filter Connection</h2>
+<p>Two All-Pass filters in parallel can create a notch filter. Observe the following:</p>
+$$H_1(z)=\frac{z-\frac{1}{p^*}}{z-p}$$<p>
+</p>
+$$H_2(z)=\frac{z+\frac{1}{p^*}}{z+p}$$<p>Notice that the above filters have passband gain of $\frac{1}{|p|}$</p>
+$$H_1(z)+H_2(z)=\frac{z-\frac{1}{p^*}}{z-p}+\frac{z+\frac{1}{p^*}}{z+p}=\frac{(z-\frac{1}{p^*})(z+p)+(z+\frac{1}{p^*})(z-p)}{(z-p)(z+p)}$$<p>
+</p>
+$$\frac{(z-\frac{1}{p^*})(z+p)+(z+\frac{1}{p^*})(z-p)}{(z-p)(z+p)}=\frac{z^2+z(p-\frac{1}{p^*})-\frac{p}{p^*}+z^2-z(p-\frac{1}{p^*})-\frac{p}{p^*}}{(z-p)(z+p)}=2\frac{z^2-\frac{p}{p^*}}{(z-p)(z+p)}=2\frac{(z+\sqrt{\frac{p}{p^*}})(z-\sqrt{\frac{p}{p^*}})}{(z-p)(z+p)}$$<p>Finally, we obtain
+</p>
+$$H_1(z)+H_2(z)=2\frac{(z-e^{j(\angle p+\pi)})(z-e^{j\angle p})}{(z-p)(z+p)}$$<p>Which is a notch filter with notching frequencies $\omega = \{\angle p, \angle p + \pi\}$</p>
+<h2 id="pole-zero-cancellation-difference-equations">Pole-Zero Cancellation: Difference Equations</h2>
+<p>Consider the following system:</p>
+$$y[n]=e^{j2\pi\frac{l}{n}}y[n-1]+x[n]-x[n-N]$$<p>With $l < N$</p>
+<h3 id="basic-analysis-1">Basic Analysis</h3>
+<p>This system fits the form of IIR, but in fact is FIR.</p>
+$$H(z)=\frac{1-z^{-N}}{1-e^{j2\pi\frac{l}{n}}z^{-1}}=\frac{z^{N}-1}{z^{N}-e^{j2\pi\frac{l}{n}}z^{N-1}}=\frac{\Pi_{k=0}^{N-1}(z-e^{j\frac{2\pi k}{N}})}{z^{N-1}(z-e^{j2\pi\frac{l}{n}})}=\frac{\Pi_{k=0}^{l-1}(z-e^{j\frac{2\pi k}{N}})\Pi_{k=l+1}^{N-1}(z-e^{j\frac{2\pi k}{N}})}{z^{N-1}}$$<p>As can be seen, the impulse response simply consists of zeros, without any (nonzero) poles, because a pole/zero cancellation occured.</p>
+<h3 id="frequency-response">Frequency Response</h3>
+<p>We revert to the stage before the pole-zero cancellation, to make our work easier:</p>
+$$H(e^{j\omega})=\frac{e^{j\omega N}-1}{e^{j\omega (N-1)}(e^{j\omega}-e^{j2\pi\frac{l}{n}})}$$<p>And make use of the &ldquo;half-angle trick&rdquo;:</p>
+$$
+H(e^{j\omega})=\frac{(e^{j\omega \frac{N}{2}}-e^{-j\omega \frac{N}{2}})e^{j\omega \frac{N}{2}}}{(e^{j\frac{\omega}{2}}e^{-j\pi\frac{l}{n}}-e^{-j\frac{\omega}{2}}e^{j\pi\frac{l}{n}})e^{j\frac{\omega}{2}}e^{j\pi\frac{l}{n}}e^{j\omega (N-1)}}
+=\frac{(e^{j\omega \frac{N}{2}}-e^{-j\omega \frac{N}{2}})e^{j\omega \frac{N}{2}}}{(e^{j(\frac{\omega}{2}-\pi\frac{l}{n})}-e^{-j(\frac{\omega}{2}-\pi\frac{l}{n})})e^{j(\frac{\omega}{2}+\pi\frac{l}{n}+\omega (N-1))}}
+= \frac{(e^{j\omega \frac{N}{2}}-e^{-j\omega \frac{N}{2}})e^{j(\omega \frac{1-N}{2}-\pi\frac{l}{n})}}{(e^{j(\frac{\omega}{2}-\pi\frac{l}{n})}-e^{-j(\frac{\omega}{2}-\pi\frac{l}{n})})}
+$$
+			</div>
+			
+		</article>
+	</main>
+
+	<footer>
+	<p>&copy; 2025 <a href="https://ausectj.com/">Tim Ausec</a></p>
+</footer>
+
+</body>
+</html>
