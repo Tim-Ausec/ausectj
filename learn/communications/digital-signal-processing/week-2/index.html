@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ECE538 Week 2: Autocorrelation and Cross-Correlation</title>
+	
+	
+	<link rel="stylesheet" href="/css/style.css">
+	
+	
+    	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['$$', '$$']],  
+      inlineMath: [['$', '$']]                  
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+	
+</head>
+<body>
+	<header>
+	<nav>
+	
+	<a class = "logo" href="https://ausectj.com/">
+    	<img src="/images/Ion_Engine_Dark.png" alt="Home" width = "75" height = "100">
+	</a>
+	
+			
+			<a href="/learn">Learn</a>
+			
+			<a href="/posts">Posts</a>
+			
+			<a href="/projects">Projects</a>
+			
+	</nav>
+	
+	<hr>
+</header>
+
+	
+	<main>
+		<article>
+			<h1>ECE538 Week 2: Autocorrelation and Cross-Correlation</h1>
+			<time datetime="2025-07-13T14:14:25">13.07.2025 14:14</time>
+			<div>
+				<p>This is where new content for the course starts. The purpose of this week was to understand autocorrelation, its properties, and its applicatiions.</p>
+<p>The idea of autocorrelation is to see if a particular signal is embedded in a received signal. This is often used in radar applications, where the received signal is a time-delayed version of the original transmitted signal, with some noise added. Take the below example:</p>
+$$y[n]=\sum_{k=-\infty}^{\infty}a_kx[n-Dk]+w[n]$$<p>Notice the following:</p>
+$$z[n]=y[n]*x^*[-n]=\sum_{k=-\infty}^{\infty}a_kx[n-Dk]*x^*[-n]+w[n]*x^*[-n]$$$$z[n]=\sum_{k=-\infty}^{\infty}a_kx[n]*\delta(n-Dk)*x^*[-n]+w[n]*x^*[-n]$$$$z[n]=\sum_{k=-\infty}^{\infty}a_kx[n]*x^*[-n]*\delta(n-Dk)+w[n]*x^*[-n]$$$$z[n]=\sum_{k=-\infty}^{\infty}a_kr_{xx}[n]*\delta(n-Dk)+w[n]*x^*[-n]$$<p>Now, we define cross-correlation:</p>
+$$r_{xy}[l]=x[l]*y^*[-l]=\sum_{k=-\infty}^{\infty}x[k]y^*[k-l]$$<p>Autocorrelation occurs when $y=x$:</p>
+$$r_{xx}[l]=x[l]*x^*[-l]=\sum_{k=-\infty}^{\infty}x[k]x^*[k-l]$$<p>Thus,</p>
+$$z[n]=\sum_{k=-\infty}^{\infty}a_kr_{xx}[n-Dk]+r_{wx}$$<p>With the appropriate choice of $x[n]$, $r_{xx}[n-Dk]=\delta[n-Dk]$, giving a clear signal that indicates when $x[n-Dk]$ was received.</p>
+<h2 id="properties-of-autocorrelation--useful-tidbits">Properties of Autocorrelation / Useful TidBits</h2>
+<ol>
+<li>Hemertian Symmetry:
+$$r_{xx}[-n]=r_{xx}^*[n]$$
+$$r_{xx}[n]=r_{xx}^*[-n]$$
+Proof:
+$$r_{xx}[-n]=x[-n]*x^*[n]=x^*[n]*x[-n]$$
+$$r_{xx}^*[n]=x^*[n]*x[-n]$$</li>
+<li>Zero property:
+$$|r_{xx}[n]|\leq |r_{xx}[0]| \forall n$$</li>
+<li>DTFT:
+$$\sum_{k=-\infty}^{\infty}r_{xx}[n]e^{-j\omega n} \geq 0, \in \mathbb{R}, \forall \omega$$</li>
+<li>Time Invariance:
+$$x[n]*x^*[-n]=x[n]*x^*[-n]|_{n=n-n_0}$$</li>
+<li>Frequency Shift:
+$$y[n]=e^{j(\omega_0 n + \theta_0)}x[n]\Rightarrow r_{yy}[n]=e^{j\omega_0 n}r_{xx}[n]$$</li>
+<li>LTI Systems:
+$$y[n] = x[n]*h[n] \Rightarrow r_{yy}[n]=r_{xx}[n] * r_{hh}[n]$$</li>
+<li>Geometric Autocorrelation:
+$$x[n] = a^nu[n] \Rightarrow r_{xx}[n]=\frac{1}{1-a^2}a^{|n|}, |a|<1$$</li>
+<li>Autocorrelation in the Frequency Domain (see properties 3 and 4 in the Z-transform properties section):
+$$r_{xx}[n]=x[n]*x^*[-n]\Rightarrow S_{xx}(e^{j\omega})=X(e^{j\omega})X^*(e^{j\omega})=|X(e^{j\omega})|^2$$</li>
+</ol>
+			</div>
+			
+		</article>
+	</main>
+
+	<footer>
+	<p>&copy; 2025 <a href="https://ausectj.com/">Tim Ausec</a></p>
+</footer>
+
+</body>
+</html>

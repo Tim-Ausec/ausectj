@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Learns on Tim Ausec</title>
+    <title>Learn on Tim Ausec</title>
     <link>https://ausectj.com/learn/</link>
-    <description>Recent content in Learns on Tim Ausec</description>
+    <description>Recent content in Learn on Tim Ausec</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Jul 2025 14:14:25 -0400</lastBuildDate>
+    <lastBuildDate></lastBuildDate>
     <atom:link href="https://ausectj.com/learn/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>ECE538 Exam 1</title>
-      <link>https://ausectj.com/learn/ece538-exam1/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/ece538-exam1/</guid>
-      <description>&lt;p&gt;Topics and concepts covered in the first 5 weeks of ECE538 at Purdue University.&lt;/p&gt;</description>
-    </item>
   </channel>
 </rss>

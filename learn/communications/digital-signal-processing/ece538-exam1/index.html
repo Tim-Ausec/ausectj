@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>ECE538 Exam 1</title>
@@ -27,7 +27,7 @@
 	<header>
 	<nav>
 	
-	<a class = "logo" href="http://localhost:1313/">
+	<a class = "logo" href="https://ausectj.com/">
     	<img src="/images/Ion_Engine_Dark.png" alt="Home" width = "75" height = "100">
 	</a>
 	
@@ -69,17 +69,8 @@ $$
           0 & n \neq n_0 \\
           1 & n = n_0 \\
        \end{cases}
-$$<h3 id="geometric">Geometric:</h3>
-<p>$x(t)=e^{-\frac{t}{\tau}}u(t)$ is the eigenfunction of all LTI systems. This makes it a very important function in continuous time systems.</p>
-<p>The geometric sequence is the equivalent of the exponential function in discrete time systems.
-</p>
-$$x[n]=x(nT_s)=e^{-\frac{nT_s}{\tau}}u(nT_s)=(e^{-\frac{T_s}{\tau}})^{n}u[n]=a^nu[n]$$$$x[n]=a^nu[n]$$<h3 id="dt-sine-wave">DT Sine Wave:</h3>
-$$x[n]=e^{j\omega_0 n}$$<p>Properties:</p>
-<ol>
-<li>Aliasing
-$$e^{j(\omega_0 + 2\pi k)n}=e^{j\omega_0 n}$$</li>
-<li>Periodicity:</li>
-</ol>
+$$$$e^{j(\omega_0 + 2\pi k)n}=e^{j\omega_0 n}$$<p>
+2. Periodicity:</p>
 <p>2a. Condition on Periodicity
 </p>
 $$e^{j\omega_0(n+N)}=e^{j\omega_0 n} \iff \frac{\omega_0}{2\pi} \in \mathbb{Q}$$<p>2b. Fundamental Period: find the smallest k so that
@@ -133,7 +124,7 @@ $$x[n] = a^nu[n] \Rightarrow r_{xx}[n]=\frac{1}{1-a^2}a^{|n|}, |a|<1$$</li>
 <li>Autocorrelation in the Frequency Domain (see properties 3 and 4 in the Z-transform properties section):
 $$r_{xx}[n]=x[n]*x^*[-n]\Rightarrow S_{xx}(e^{j\omega})=X(e^{j\omega})X^*(e^{j\omega})=|X(e^{j\omega})|^2$$</li>
 </ol>
-<h1 id="week-3-week-3z-transform--dt-fourier-transform">Week 3: Week 3.Z-Transform &amp; DT Fourier Transform</h1>
+<h1 id="week-3-z-transform--dt-fourier-transform">Week 3: Z-Transform &amp; DT Fourier Transform</h1>
 <p>The purpose of this week is to revisit the idea of the Z-transform and DTFT.</p>
 <h2 id="derivation--motivation">Derivation / Motivation</h2>
 <h3 id="z-transform">Z-Transform</h3>
@@ -251,7 +242,7 @@ $$
 	</main>
 
 	<footer>
-	<p>&copy; 2025 <a href="http://localhost:1313/">Tim Ausec</a></p>
+	<p>&copy; 2025 <a href="https://ausectj.com/">Tim Ausec</a></p>
 </footer>
 
 </body>

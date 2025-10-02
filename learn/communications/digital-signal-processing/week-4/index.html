@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ECE538 Week 4: Frequency Response of LTI Systems</title>
+	
+	
+	<link rel="stylesheet" href="/css/style.css">
+	
+	
+    	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['$$', '$$']],  
+      inlineMath: [['$', '$']]                  
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+	
+</head>
+<body>
+	<header>
+	<nav>
+	
+	<a class = "logo" href="https://ausectj.com/">
+    	<img src="/images/Ion_Engine_Dark.png" alt="Home" width = "75" height = "100">
+	</a>
+	
+			
+			<a href="/learn">Learn</a>
+			
+			<a href="/posts">Posts</a>
+			
+			<a href="/projects">Projects</a>
+			
+	</nav>
+	
+	<hr>
+</header>
+
+	
+	<main>
+		<article>
+			<h1>ECE538 Week 4: Frequency Response of LTI Systems</h1>
+			<time datetime="2025-07-13T14:14:25">13.07.2025 14:14</time>
+			<div>
+				<p>The purpose of this week was to understand how pole/zero placement of the impulse response can affect the frequency response of an LTI system.</p>
+<h2 id="all-pass-filter">All-Pass Filter</h2>
+<h3 id="basic-analysis">Basic Analysis</h3>
+<p>All-pass filters have the below impulse response:
+</p>
+$$H(e^{j\omega})=G\frac{e^{j\omega}-\frac{1}{p^*}}{e^{j\omega}-p}$$<p>Proof:
+</p>
+$$G\frac{e^{j\omega}-\frac{1}{p^*}}{e^{j\omega}-p}=G\frac{-\frac{e^{j\omega}}{p^*}(e^{-j\omega}-p^*)}{e^{j\omega}-p}=G\frac{-\frac{e^{j\omega}}{p^*}(e^{j\omega}-p)^*}{e^{j\omega}-p}$$<p>
+Therefore
+</p>
+$$|H(e^{j\omega})|=|G|\frac{|-\frac{e^{j\omega}}{p^*}||(e^{j\omega}-p)^*|}{|e^{j\omega}-p|}=\frac{|G|}{|p|}, \forall \omega$$<p>
+Which is an all-pass filter. Notice that $|G|=|p|$ normalizes the all-pass.</p>
+<h3 id="connection-to-autocorrelation">Connection to Autocorrelation</h3>
+<p>Recall that
+</p>
+$$DTFT\{r_{hh}[n]\}=|H(e^{j\omega})|^2=(\frac{|G|}{|p|})^2$$<p>
+Therefore
+</p>
+$$h[n]*h^*[-n]=(\frac{|G|}{|p|})^2\delta[n]$$<h3 id="time-domain">Time-Domain</h3>
+$$H(z)=p\frac{z-\frac{1}{p^*}}{z-p}=p\frac{z}{z-p}-\frac{p}{p^*}z^{-1}\frac{z}{z-p}$$<p>Thus</p>
+$$h[n]=pp^nu[n]-e^{j2\angle p}p^{n-1}u[n-1]$$<p>A more common expression can be obtained with further manipulation:</p>
+$$=p\delta[n]+pp^nu[n-1]-\frac{e^{j2\angle p}}{p}p^nu[n-1]=p\delta[n]+(p-\frac{e^{j2\angle p}}{p})p^nu[n-1]=p\delta[n]+(p-\frac{e^{j2\angle p}}{p})p^{n}u[n] - (p-\frac{e^{j2\angle p}}{p})\delta[n]=\frac{e^{j2\angle p}}{p}\delta[n]+(\frac{p^2-e^{j2\angle p}}{p})p^{n}u[n]$$<p>Obtaining</p>
+$$h[n]=\frac{1}{p}(e^{j2\angle p}\delta[n]+(p^2-e^{j2\angle p})p^{n}u[n])$$<p>Notice that if $p \in \mathbb{R}$
+</p>
+$$\boxed{h[n]=\frac{1}{p}(\delta[n]+(p^2-1)p^{n}u[n])}$$<h2 id="notch-filter">Notch Filter</h2>
+<p>Nothced filters have the following impulse response:
+</p>
+$$H(e^{j\omega})=G\frac{\Pi_{k=0}^{M}(e^{j\omega}-e^{j\omega_{k}})}{\Pi_{k=0}^{M}(e^{j\omega}-re^{j\omega_{k}})}$$<p>The key is that the zeros lie on the unit circle at the frequencies that are notched out. The poles create a contrast between the surrounding frequencies and the notched frequencies. The closer the poles are to the unit circle, the narrower the notching is.</p>
+<h2 id="notch-filter-and-all-pass-filter-connection">Notch Filter and All-Pass Filter Connection</h2>
+<p>Two All-Pass filters in parallel can create a notch filter. Observe the following:</p>
+$$H_1(z)=\frac{z-\frac{1}{p^*}}{z-p}$$<p>
+</p>
+$$H_2(z)=\frac{z+\frac{1}{p^*}}{z+p}$$<p>Notice that the above filters have passband gain of $\frac{1}{|p|}$</p>
+$$H_1(z)+H_2(z)=\frac{z-\frac{1}{p^*}}{z-p}+\frac{z+\frac{1}{p^*}}{z+p}=\frac{(z-\frac{1}{p^*})(z+p)+(z+\frac{1}{p^*})(z-p)}{(z-p)(z+p)}$$<p>
+</p>
+$$\frac{(z-\frac{1}{p^*})(z+p)+(z+\frac{1}{p^*})(z-p)}{(z-p)(z+p)}=\frac{z^2+z(p-\frac{1}{p^*})-\frac{p}{p^*}+z^2-z(p-\frac{1}{p^*})-\frac{p}{p^*}}{(z-p)(z+p)}=2\frac{z^2-\frac{p}{p^*}}{(z-p)(z+p)}=2\frac{(z+\sqrt{\frac{p}{p^*}})(z-\sqrt{\frac{p}{p^*}})}{(z-p)(z+p)}$$<p>Finally, we obtain
+</p>
+$$H_1(z)+H_2(z)=2\frac{(z-e^{j(\angle p+\pi)})(z-e^{j\angle p})}{(z-p)(z+p)}$$<p>Which is a notch filter with notching frequencies $\omega = \{\angle p, \angle p + \pi\}$</p>
+<h2 id="pole-zero-cancellation-difference-equations">Pole-Zero Cancellation: Difference Equations</h2>
+<p>Consider the following system:</p>
+$$y[n]=e^{j2\pi\frac{l}{n}}y[n-1]+x[n]-x[n-N]$$<p>With $l < N$</p>
+<h3 id="basic-analysis-1">Basic Analysis</h3>
+<p>This system fits the form of IIR, but in fact is FIR.</p>
+$$H(z)=\frac{1-z^{-N}}{1-e^{j2\pi\frac{l}{n}}z^{-1}}=\frac{z^{N}-1}{z^{N}-e^{j2\pi\frac{l}{n}}z^{N-1}}=\frac{\Pi_{k=0}^{N-1}(z-e^{j\frac{2\pi k}{N}})}{z^{N-1}(z-e^{j2\pi\frac{l}{n}})}=\frac{\Pi_{k=0}^{l-1}(z-e^{j\frac{2\pi k}{N}})\Pi_{k=l+1}^{N-1}(z-e^{j\frac{2\pi k}{N}})}{z^{N-1}}$$<p>As can be seen, the impulse response simply consists of zeros, without any (nonzero) poles, because a pole/zero cancellation occured.</p>
+<h3 id="frequency-response">Frequency Response</h3>
+<p>We revert to the stage before the pole-zero cancellation, to make our work easier:</p>
+$$H(e^{j\omega})=\frac{e^{j\omega N}-1}{e^{j\omega (N-1)}(e^{j\omega}-e^{j2\pi\frac{l}{n}})}$$<p>And make use of the &ldquo;half-angle trick&rdquo;:</p>
+$$
+H(e^{j\omega})=\frac{(e^{j\omega \frac{N}{2}}-e^{-j\omega \frac{N}{2}})e^{j\omega \frac{N}{2}}}{(e^{j\frac{\omega}{2}}e^{-j\pi\frac{l}{n}}-e^{-j\frac{\omega}{2}}e^{j\pi\frac{l}{n}})e^{j\frac{\omega}{2}}e^{j\pi\frac{l}{n}}e^{j\omega (N-1)}}
+=\frac{(e^{j\omega \frac{N}{2}}-e^{-j\omega \frac{N}{2}})e^{j\omega \frac{N}{2}}}{(e^{j(\frac{\omega}{2}-\pi\frac{l}{n})}-e^{-j(\frac{\omega}{2}-\pi\frac{l}{n})})e^{j(\frac{\omega}{2}+\pi\frac{l}{n}+\omega (N-1))}}
+= \frac{(e^{j\omega \frac{N}{2}}-e^{-j\omega \frac{N}{2}})e^{j(\omega \frac{1-N}{2}-\pi\frac{l}{n})}}{(e^{j(\frac{\omega}{2}-\pi\frac{l}{n})}-e^{-j(\frac{\omega}{2}-\pi\frac{l}{n})})}
+$$
+			</div>
+			
+		</article>
+	</main>
+
+	<footer>
+	<p>&copy; 2025 <a href="https://ausectj.com/">Tim Ausec</a></p>
+</footer>
+
+</body>
+</html>

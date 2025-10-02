@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ECE538 Week 1: Discrete Time Signals and Systems Basics</title>
+	
+	
+	<link rel="stylesheet" href="/css/style.css">
+	
+	
+    	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['$$', '$$']],  
+      inlineMath: [['$', '$']]                  
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+	
+</head>
+<body>
+	<header>
+	<nav>
+	
+	<a class = "logo" href="https://ausectj.com/">
+    	<img src="/images/Ion_Engine_Dark.png" alt="Home" width = "75" height = "100">
+	</a>
+	
+			
+			<a href="/learn">Learn</a>
+			
+			<a href="/posts">Posts</a>
+			
+			<a href="/projects">Projects</a>
+			
+	</nav>
+	
+	<hr>
+</header>
+
+	
+	<main>
+		<article>
+			<h1>ECE538 Week 1: Discrete Time Signals and Systems Basics</h1>
+			<time datetime="2025-07-13T14:14:25">13.07.2025 14:14</time>
+			<div>
+				<p>The purpose of this week was to easily slide into the course material and work with convolution in the discrete time case.</p>
+<h2 id="sampling-basics">Sampling (basics)</h2>
+<p>Sampling is the process of converting a continuous time signal into a discrete time signal. The sampling done in this course is all even-width sampling, which means</p>
+$$x[n]\overset{\Delta}{=}x(nT_s) \forall n \in \mathbb{Z}$$<p>Where $T_s$ is called the sampling period, with a corresponding $f_s = \frac{1}{T_s}$ as the sampling frequency.</p>
+<h2 id="special-signals">Special Signals</h2>
+<p>Common signals to work with are:</p>
+<h3 id="unit-step">Unit step:</h3>
+$$ 
+    u[n-n_0] = \begin{cases} 
+          0 & n < n_0 \\
+          1 & n\geq n_0 \\
+       \end{cases}
+$$<h3 id="dt-impulse">DT Impulse:</h3>
+$$ 
+    \delta[n-n_0] = \begin{cases} 
+          0 & n \neq n_0 \\
+          1 & n = n_0 \\
+       \end{cases}
+$$<h3 id="geometric">Geometric:</h3>
+<p>$x(t)=e^{-\frac{t}{\tau}}u(t)$ is the eigenfunction of all LTI systems. This makes it a very important function in continuous time systems.</p>
+<p>The geometric sequence is the equivalent of the exponential function in discrete time systems.
+</p>
+$$x[n]=x(nT_s)=e^{-\frac{nT_s}{\tau}}u(nT_s)=(e^{-\frac{T_s}{\tau}})^{n}u[n]=a^nu[n]$$$$x[n]=a^nu[n]$$<h3 id="dt-sine-wave">DT Sine Wave:</h3>
+$$x[n]=e^{j\omega_0 n}$$<p>Properties:</p>
+<ol>
+<li>Aliasing
+$$e^{j(\omega_0 + 2\pi k)n}=e^{j\omega_0 n}$$</li>
+<li>Periodicity:</li>
+</ol>
+<p>2a. Condition on Periodicity
+</p>
+$$e^{j\omega_0(n+N)}=e^{j\omega_0 n} \iff \frac{\omega_0}{2\pi} \in \mathbb{Q}$$<p>2b. Fundamental Period: find the smallest k so that
+</p>
+$$N_0 = k\frac{2\pi}{\omega_0} \in \mathbb{Z}$$<h2 id="convolution">Convolution</h2>
+<p>Convolution in discrete time is defined as</p>
+$$x[n]*h[n]=\sum_{k=-\infty}^{\infty}x[k]h[n-k]=\sum_{k=-\infty}^{\infty}h[k]x[n-k]$$<p>LTI systems operate on the input by convolution of the impulse response. This can be shown with the below approach:</p>
+$$y[n]=T\{x[n]\}=T\{\sum_{k=-\infty}^{\infty}x[k]\delta[n-k]\}=\sum_{k=-\infty}^{\infty}x[k]T\{\delta[n-k]\}=\sum_{k=-\infty}^{\infty}x[k]h[n-k]=x[n]*h[n]$$<h3 id="methods-of-convolution">Methods of Convolution</h3>
+<ol>
+<li>Directly apply the formula</li>
+<li>Graphical convolution</li>
+</ol>
+<figure><img src="/images/Graphical_Convolution.png"
+    alt="Steps for graphical convolution" width="500">
+</figure>
+
+<h3 id="properties-of-convolution">Properties of Convolution</h3>
+<ol>
+<li>Associative</li>
+<li>Commutative</li>
+<li>Distributive</li>
+</ol>
+			</div>
+			
+		</article>
+	</main>
+
+	<footer>
+	<p>&copy; 2025 <a href="https://ausectj.com/">Tim Ausec</a></p>
+</footer>
+
+</body>
+</html>

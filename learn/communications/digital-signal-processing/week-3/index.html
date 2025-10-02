@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ECE538 Week 3: Z-Transform &amp; DT Fourier Transform</title>
+	
+	
+	<link rel="stylesheet" href="/css/style.css">
+	
+	
+    	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['$$', '$$']],  
+      inlineMath: [['$', '$']]                  
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+	
+</head>
+<body>
+	<header>
+	<nav>
+	
+	<a class = "logo" href="https://ausectj.com/">
+    	<img src="/images/Ion_Engine_Dark.png" alt="Home" width = "75" height = "100">
+	</a>
+	
+			
+			<a href="/learn">Learn</a>
+			
+			<a href="/posts">Posts</a>
+			
+			<a href="/projects">Projects</a>
+			
+	</nav>
+	
+	<hr>
+</header>
+
+	
+	<main>
+		<article>
+			<h1>ECE538 Week 3: Z-Transform &amp; DT Fourier Transform</h1>
+			<time datetime="2025-07-13T14:14:25">13.07.2025 14:14</time>
+			<div>
+				<p>The purpose of this week is to revisit the idea of the Z-transform and DTFT.</p>
+<h2 id="derivation--motivation">Derivation / Motivation</h2>
+<h3 id="z-transform">Z-Transform</h3>
+<p>As stated previously, the geometric series is the eigenfunction for LTI systems in discrete time:</p>
+$$y[n]=h[n]*x[n]=\sum_{k=-\infty}^{\infty}h[k]a^{n-k}=(\sum_{k=-\infty}^{\infty}h[k]a^{-k})a^n=H(a)a^n$$<p>Thus, we define
+</p>
+$$H(z)=Z\{h[n]\}=\sum_{n=-\infty}^{\infty}h[n]z^{-n}$$<h3 id="dtft">DTFT</h3>
+<p>Let $x[n]=e^{j\omega_0 n}$ and pass into LTI system:
+</p>
+$$y[n]=h[n]*x[n]=\sum_{k=-\infty}^{\infty}h[k]e^{j\omega_0(n-k)}=(\sum_{k=-\infty}^{\infty}h[k]e^{-j\omega k})e^{j\omega_0 n}=H(e^{j\omega_0})e^{j\omega_0 n}$$<p>Thus, the DTFT is nothing but evaluating the Z-transform on the unit circle:
+</p>
+$$H(e^{j\omega})=DTFT\{h[n]\}=H(z)|_{z=e^{j\omega}}=\sum_{n=-\infty}^{\infty}h[n]e^{-j\omega_0 n}$$<h2 id="stability">Stability</h2>
+<p>First, express $H(z)$ in terms of poles and zeroes (a relatively unrestrictive assumption, see Difference Equations):
+</p>
+$$H(z)=\frac{\Pi_{k=0}^{M}(z-z_k)}{\Pi_{k=0}^{N}(p-p_k)}$$<p>Notice first that the radius of convergence of $H(z)$ must be given by $|z|>|p_{max}|$, where $p_{max}$ is the pole with the largest magnitude.</p>
+<p>Notice second that the definition of the Z-transform and the triangle inequality obtains:
+</p>
+$$|H(z)|\leq \sum_{n=-\infty}^{\infty}|h[n]z^{-n}|$$<p>We know that BIBO stability requires
+$$$\sum_{n=-\infty}^{\infty}|h[n]| < \infty$</p>
+<p>So evaluate the above at $z=e^{j\omega}$
+</p>
+$$|H(e^{j\omega})|\leq \sum_{n=-\infty}^{\infty}|h[n]|<\infty$$<p>This means that the radius of convergence must include the unit circle. Since $|z_{max}|=1>|p_{max}|$, this means that in order for a system to be BIBO stable, all poles must be within the unit circle.</p>
+<h2 id="difference-equations">Difference Equations</h2>
+<p>A difference equation is the DT analogy to a CT differential equation. They are given in the below form:</p>
+$$y[n]=\sum_{k=0}^{M}a_kx[n-k]-\sum_{k=1}^{N}b_ky[n-k]$$<h3 id="simple-analysis">Simple Analysis</h3>
+<p>Taking the Z-transform of both sides:
+</p>
+$$Y(z)=\sum_{k=0}^{M}a_kX(z)z^{-k}-\sum_{k=1}^{N}b_kY(z)z^{-k}$$<p>Solving for $H(z)=\frac{Y(z)}{X(z)}$:</p>
+$$H(z)=\frac{\sum_{k=0}^{M}a_kz^{-k}}{1+\sum_{k=1}^{N}b_kz^{-k}}$$<p>From here, pole-zero analysis can be performed.</p>
+<h3 id="fir-iir">FIR, IIR</h3>
+<p>Finite impulse response (FIR) systems often take the following form:</p>
+$$y[n]=\sum_{k=0}^{M}a_kx[n-k]$$<p>As can be seen:</p>
+$$h[n]=\sum_{k=0}^{M}a_k\delta[n-k]$$<p>.</p>
+<p>$\fbox{The defining characteristic of FIR systems is that they have no (nonzero) poles, only zeros.}$</p>
+<p>Infinite impulse response (IIR) systems take the form of a general difference equation. $\fbox{If a system has a nonzero pole, it is IIR.}$</p>
+<p>The names of both types come from the length of time it takes for the impulse response to stay at 0. This never happens for IIRs, and always happens for FIRs.</p>
+<h2 id="pole-zero-analysis">Pole-Zero Analysis</h2>
+<p>It is useful to be able to look at just $|H(z)|$ or $\angle H(z)$ for any given $z$. Since $H(z)$ can usually be written as a rational function of polynomials, this analysis is not difficult if we understand complex numbers.</p>
+$$H(z)=\frac{\Pi_{k=0}^{M}(z-z_k)}{\Pi_{k=0}^{N}(p-p_k)}$$$$|H(z)|=\frac{\Pi_{k=0}^{M}|z-z_k|}{\Pi_{k=0}^{N}|p-p_k|}$$<p>
+</p>
+$$\angle H(z)=\Pi_{k=0}^{M}\angle(z-z_k)-\Pi_{k=0}^{N}\angle(p-p_k)$$<p>This can be easily programmed and calculated.</p>
+<h2 id="properties--useful-tidbits">Properties / Useful TidBits</h2>
+<ol>
+<li>Time shifting
+$$Z\{x[n-n_0]\}=z^{-n_0}X(z)$$</li>
+<li>Convolution
+$$Z\{x[n]*h[n]\}=X(z)H(z)$$</li>
+<li>Conjugation
+$$Z\{x^*[n]\}=X^*(z^*)$$</li>
+<li>Time-Reversal
+$$Z\{x[-n]\}=X(\frac{1}{z})$$</li>
+<li>Geometric Sequence
+$$Z\{a^nu[n]\}=\frac{z}{z-a} \forall |z|>|a|$$</li>
+<li>Derivative in Z-domain
+$$Z\{nx[n]\}=-z\frac{d}{dz}X(z)$$</li>
+<li>Domain Stretch in Z-domain
+$$Z\{a^nx[n]\}=X(\frac{z}{a})$$</li>
+</ol>
+			</div>
+			
+		</article>
+	</main>
+
+	<footer>
+	<p>&copy; 2025 <a href="https://ausectj.com/">Tim Ausec</a></p>
+</footer>
+
+</body>
+</html>
