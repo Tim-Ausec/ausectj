@@ -1,0 +1,20 @@
+.parent {
+  padding: 1rem;
+}
+
+.child {
+  border: 1px solid rgb(0, 0, 0);
+  padding: 1rem;
+}
+
+.flex-parent {
+  display: flex;
+}
+
+.flex-child-middle {
+  flex: 3;
+}
+
+.flex-child-side {
+  flex: 1;
+}

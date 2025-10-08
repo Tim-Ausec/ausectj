@@ -6,14 +6,63 @@
     <description>Recent content on Tim Ausec</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Sep 2025 23:28:00 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 02 Oct 2025 16:22:00 -0400</lastBuildDate>
     <atom:link href="https://ausectj.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bar-Spring-Problem</title>
+      <link>https://ausectj.com/learn/statics/bar-spring-problem/</link>
+      <pubDate>Thu, 02 Oct 2025 16:22:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/statics/bar-spring-problem/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/Bar-Spring-Problem.png&#34;&#xA;    alt=&#34;Agrovolo Picture&#34; width=&#34;500&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;Determine $\theta$ when the system reaches equilibrium. $\theta = 0$ when the spring is uncompressed.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Agrovolo</title>
       <link>https://ausectj.com/projects/agrovolo/</link>
       <pubDate>Wed, 17 Sep 2025 23:28:00 -0400</pubDate>
       <guid>https://ausectj.com/projects/agrovolo/</guid>
       <description>&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/Agrovolo_Prototype.png&#34;&#xA;    alt=&#34;Agrovolo Picture&#34; width=&#34;500&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;Agrovolo is a one-stop-shop solution for aerial imaging data targeted at agriculture / land management use cases.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ECE440 Week 1</title>
+      <link>https://ausectj.com/learn/communications/wireless-transmission/week-1/</link>
+      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ECE440 Week 2</title>
+      <link>https://ausectj.com/learn/communications/wireless-transmission/week-2/</link>
+      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-2/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ECE440 Week 3</title>
+      <link>https://ausectj.com/learn/communications/wireless-transmission/week-3/</link>
+      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-3/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ECE440 Week 4</title>
+      <link>https://ausectj.com/learn/communications/wireless-transmission/week-4/</link>
+      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-4/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ECE440 Week 5</title>
+      <link>https://ausectj.com/learn/communications/wireless-transmission/week-5/</link>
+      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-5/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ECE440 Week 6</title>
+      <link>https://ausectj.com/learn/communications/wireless-transmission/week-6/</link>
+      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-6/</guid>
+      <description></description>
     </item>
     <item>
       <title>ECE538 Exam 1</title>

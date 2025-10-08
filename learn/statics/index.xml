@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Statics on Tim Ausec</title>
+    <link>https://ausectj.com/learn/statics/</link>
+    <description>Recent content in Statics on Tim Ausec</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Oct 2025 16:22:00 -0400</lastBuildDate>
+    <atom:link href="https://ausectj.com/learn/statics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bar-Spring-Problem</title>
+      <link>https://ausectj.com/learn/statics/bar-spring-problem/</link>
+      <pubDate>Thu, 02 Oct 2025 16:22:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/statics/bar-spring-problem/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/Bar-Spring-Problem.png&#34;&#xA;    alt=&#34;Agrovolo Picture&#34; width=&#34;500&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;Determine $\theta$ when the system reaches equilibrium. $\theta = 0$ when the spring is uncompressed.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
