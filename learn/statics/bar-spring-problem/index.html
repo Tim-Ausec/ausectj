@@ -45,7 +45,7 @@
 	<main>
 		<article>
 			<h1>Bar-Spring-Problem</h1>
-			<time datetime="2025-10-02T16:22:00">02.10.2025 16:22</time>
+			<time datetime="2025-10-24T15:00:00">24.10.2025 15:00</time>
 			<div>
 				<figure><img src="/images/Bar-Spring-Problem.png"
     alt="Agrovolo Picture" width="500">
@@ -53,7 +53,20 @@
 
 <p>Determine $\theta$ when the system reaches equilibrium. $\theta = 0$ when the spring is uncompressed.</p>
 <p>Notice that</p>
-$$F_s = k\Delta x = k[l-lcos(\theta)]=kl[1-cos(\theta)]$$
+$$F_s = k\Delta x = k[l-lcos(\theta)]=kl[1-cos(\theta)]$$<p>Now, apply static equilibrium:
+</p>
+$$\Sigma F_x=0=B_x-F_s \Rightarrow B_x=F_s$$<p>
+</p>
+$$\Sigma F_y=0=A_y-w \Rightarrow A_y=w$$<p>
+</p>
+$$\Sigma M_A=0=w\frac{l}{2}cos(\theta)-F_slsin(\theta)$$<p>Substitute the expression that we found for $F_s$,
+</p>
+$$w\frac{1}{2}cos(\theta)=kl[1-cos(\theta)]sin(\theta)$$<p>
+</p>
+$$\frac{w}{2kl}=[1-cos(\theta)]tan(\theta)$$<p>Now we can use graphical methods to solve, using the factor $\frac{2\pi}{360}$ to convert the x-axis to degrees:za</p>
+<figure><img src="/images/Bar-Spring-graph.png"
+    alt="Agrovolo Picture" width="1000">
+</figure>
 			</div>
 			
 		</article>

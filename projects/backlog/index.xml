@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Backlog on Tim Ausec</title>
+    <link>https://ausectj.com/projects/backlog/</link>
+    <description>Recent content in Backlog on Tim Ausec</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 Oct 2025 12:00:00 -0400</lastBuildDate>
+    <atom:link href="https://ausectj.com/projects/backlog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Personal Financial Tracker and Projector</title>
+      <link>https://ausectj.com/projects/backlog/financial-tracker/</link>
+      <pubDate>Fri, 24 Oct 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/projects/backlog/financial-tracker/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been using an excel sheet to keep track of my finances and predict what they&amp;rsquo;ll look like for about a year and a half now. However, it doesn&amp;rsquo;t work in LibreOffice Calc, so I&amp;rsquo;ll have to make a program to mimic the behavior.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

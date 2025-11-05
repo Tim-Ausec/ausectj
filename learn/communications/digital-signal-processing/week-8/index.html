@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ECE538 Week 8: Reconstruction Process and Upsampling</title>
+	
+	
+	<link rel="stylesheet" href="/css/style.css">
+	
+	
+    	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['$$', '$$']],  
+      inlineMath: [['$', '$']]                  
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+	
+</head>
+<body>
+	<header>
+	<nav>
+	
+			
+			<a href="/">Home</a>
+			
+			<a href="/learn">Learn</a>
+			
+			<a href="/posts">Posts</a>
+			
+			<a href="/projects">Projects</a>
+			
+	</nav>
+	
+	<hr>
+</header>
+
+	
+	<main>
+		<article>
+			<h1>ECE538 Week 8: Reconstruction Process and Upsampling</h1>
+			<time datetime="2025-10-19T12:00:00">19.10.2025 12:00</time>
+			<div>
+				<p>The purpose of this week is to finish up reconstruction and introduce upsampling.</p>
+<figure><img src="/images/538-Upsampling-Naive.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<h1 id="1-reconstruction-d2a-conversion">1. Reconstruction (D2A Conversion)</h1>
+<p>The below figure represents the D2A conversion process in blocks. We first focus on the LPF, then the upsampler.</p>
+<figure><img src="/images/538-D2A-BD.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<h2 id="11-ideal-reconstruction-filters">1.1 Ideal Reconstruction Filters</h2>
+<p>Recall that we have
+</p>
+$$X_s(f) = F_s\sum_{n=-\infty}^{\infty}X_a(f- nF_s)$$<p>And thus a LPF centered around the first copy of $X_a(f)$ is used to recover $x_a(t)$.</p>
+<p>The first LPF to consider is a simple rectangle. However, notice that the time domain signal required for this rectangle is an infinite-length sinc wave. Major distortion in the form of Gibb&rsquo;s phenomenon is present when truncating the signal for practical applications, thus we search for better alternatives.</p>
+<p>The next LPF to consider is inspired by the first - by moving from $sinc(t)$ to $sinc^2(t)$. Consider that $sinc^2(t)$ has a more signal power concentrated near the center of the wave than simple $sinc(t)$ does, therefore this seems promising. However, remember that $sinc^2(t)$ gives a triangle in the frequency domain, which does not preserve the property that the baseband $X_a(f)$ is preserved after the filter. Therefore, the below solution is chosen - by convolving two rectangles of different widths, we achieve the desired result.</p>
+<figure><img src="/images/538-triangle-filter.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>The final LPF to consider is the raised cosine filter. This also has the desired properties for reconstruction.</p>
+<figure><img src="/images/538-raised-cosine.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<h1 id="12-use-of-upsampling-in-reconstruction">1.2 Use of Upsampling in Reconstruction</h1>
+<p>In order to understand why upsampling is used in the reconstruction process, we must first understand the sigma-delta modulator. In short, sigma-delta modulation is an efficienct scheme for A2D and D2A conversion that changes its output level only one quantization level at a time by comparing the current value to the desired value and updating accordingly. The below figure illustrates this behavior - initially, the SDM output is 0, but it climbs at each step until it reaches the steady state of the analog signal.</p>
+<figure><img src="/images/538-SDM.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>Upsampling is used before this process because SDM is a much more accurate process the quicker you sample. So, if we can somehow digitally change the sampling frequency, we can make D2A a much more accurate process.</p>
+<h1 id="2-upsampling">2. Upsampling</h1>
+<p>The goal of digital upsampling is to acquire $x_a(\frac{nT_s}{L})$ <em>from our samples of $x_a(nT_s)$ only</em>. For now, let $L$ be an integer.</p>
+<p>In short, we desire a digital system with relation
+</p>
+$$y[n] = x[\frac{n}{L}] = \sum_{k=-\infty}^{\infty}x[k]\delta[n-kL]$$<p>Notice that in the frequency domain, the relation is
+</p>
+$$Y(\omega)=X(L\omega)$$<p>This is useful in digital subbanding</p>
+<h2 id="21-inefficient-method---zero-inserts">2.1 Inefficient Method - Zero Inserts</h2>
+<p>Recall that through the process of reconstruction, we obtain:
+</p>
+$$x_a(t)=[\sum_{k=-\infty}^{\infty}x[k]\delta(t-kT_s)]*h_{LP}(t)$$<p>
+We wish to obtain
+</p>
+$$y[n]=x_a(\frac{nTs}{L})=[\sum_{k=-\infty}^{\infty}x[k]\delta[\frac{n}{L}-k]]*h_{LP}[\frac{n}{L}]$$<p>
+Which amounts to
+</p>
+$$y[n]=x_a(\frac{nTs}{L})=x[\frac{n}{L}]*h_{LP}[\frac{n}{L}]$$<p>This is schematically represented in the below figure.</p>
+<figure><img src="/images/538-Upsampling-Naive.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>The $x[\frac{n}{L}]$ term is represented by the circle with an L inside of it. This element inserts $L-1$ zeros in between each sample of $x[n]$. Thus, the function of the LPF can be seen as &ldquo;filling in&rdquo; those zeros through convolution.</p>
+<p>However, this means that this process is incredibly inefficienct, as most of the convolution performed when passing the zero-insert output into the LPF is just multiplication by 0. We hunt for a more efficient version in the rest of this chapter.</p>
+<h2 id="22-efficient-method---fractional-time-shift-filters">2.2 Efficient Method - Fractional Time Shift Filters</h2>
+<p>First, notice that $y[n]$ can be written as below:
+</p>
+$$y[n]=\sum_{k=-\infty}^{\infty}x[k]h_{LP}[n-Lk]$$<p>
+This is very close to convolution. How could we make this convolution?
+</p>
+$$y[Ln] = \sum_{k=-\infty}^{\infty}x[k]h_{LP}[L(n-k)]=x[n]*h_{LP}[Ln]$$<p>
+Now notice that $y[Ln]$ gives every $L-1$ element of y[n] starting at $n=0$. If we shift this by 1, we should get every $L-1$ element starting at $n=1$, and we can repeat this process up to the $L-1$ element.</p>
+<p>Let
+</p>
+$$y_l[n]=y[nL+l]$$<p>
+Then we can reconstruct $y[n]$ by interleaving each $y_l[n]$ one after the other into $y[n]$, starting at $l=0$ and moving up to $l=L-1$.</p>
+<p>This can be further understood by referencing $x_a(t)$. $y_l[n]$ is given as
+</p>
+$$y_l[n]=x_a(\frac{nL+l}{L}T_s)=x_a(T_s(n+\frac{l}{L}))$$<p>The below figure visualizes the meaning of this relation. Each $y_l[n]$ is a sampling of $x_a(t)$ which starts at different multiples of $\frac{1}{L}$, in total constructing an upsampled version.</p>
+<figure><img src="/images/538-Upsampling-Illustration.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>Each $y_l[n]$ is given by
+</p>
+$$y_l[n]=y[nL+l]=x[n]*h_{LP}[Ln+l]=x[n]*h_{l}[n]$$<p>This process is laid out schematically in the below figure:
+<figure><img src="/images/538-Efficient-Upsampling.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+</p>
+<h3 id="221-polyphase-filters">2.2.1 &ldquo;Polyphase Filters&rdquo;</h3>
+<p>Fractional time shift filters are also called polyphase filters. This is because each $h_l[n]$ has linear phase, each with a different slope. To see this, assume an ideal LPF:</p>
+$$h_l[n]=\frac{sin(\pi(n+\frac{l}{L}))}{\pi(n+\frac{l}{L})}$$<p>
+Thus
+</p>
+$$H_l(\omega)=rect(\frac{\omega}{\pi})e^{j\frac{l}{L}\omega}$$<p>So each $h_l[n]$ has linear phase of $\frac{l}{L}\omega$.</p>
+<h1 id="3-downsampling">3. Downsampling</h1>
+<p>The goal of digital downsampling is to acquire $x_a(DnT_s)$ <em>from our samples of $x_a(nT_s)$ only</em>. For now, let $L$ be an integer.</p>
+<p>In short, we desire a digital system with relation
+</p>
+$$y[n] = x[Dn]$$<p>Although it won&rsquo;t be proved here, the frequency domain relationship is
+</p>
+$$Y(\omega)=\frac{1}{D}\sum_{k=0}^{D-1}X(\frac{\omega - 2\pi k}{D})$$<p>
+The basic insight of this equation is that decimation expands the original signal&rsquo;s bandwidth. The sum becomes important when aliasing occurs.</p>
+<figure><img src="/images/538-Decimation-Schematic.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+			</div>
+			
+		</article>
+	</main>
+
+	<footer>
+	<p>&copy; 2025 <a href="https://ausectj.com/">Tim Ausec</a></p>
+</footer>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ECE440 Week 1</title>
+	<title>ECE440 Week 1: Introduction to Wireless Transmission</title>
 	
 	
 	<link rel="stylesheet" href="/css/style.css">
@@ -44,10 +44,50 @@
 	
 	<main>
 		<article>
-			<h1>ECE440 Week 1</h1>
-			<time datetime="2025-07-13T14:14:25">13.07.2025 14:14</time>
+			<h1>ECE440 Week 1: Introduction to Wireless Transmission</h1>
+			<time datetime="2025-08-31T12:00:00">31.08.2025 12:00</time>
 			<div>
-				
+				<p>An introduction to wireless transmission.</p>
+<figure><img src="/images/ECE440_Intro_System.png"
+    alt="System-level view of transmission systems" width="500">
+</figure>
+
+<h1 id="1-high-level-focus-of-study">1. High Level Focus of Study</h1>
+<figure><img src="/images/ECE440_Intro_System.png"
+    alt="System-level view of transmission systems" width="500">
+</figure>
+
+<p>The course focuses on transmitter and receiver design, with an emphasis on dealing with channel and distortion effects.</p>
+<h1 id="2-channel-characteristics">2. Channel Characteristics</h1>
+<p>Given a channel of bandwidth B with noise so that the transmitter signal has a signal-to-noise ration of SNR, the channel capacity C (bits/sec = baud rate) is given by:</p>
+$$C=Blog_2(1+SNR)$$<p>At low SNR, the improvement in C seems linear, until SNR gets large and return on investment dips.</p>
+<h1 id="3-modulation">3. Modulation</h1>
+<p>Modulation is the process of translating the message signal into a form that allows efficient transmission over a channel.</p>
+<h2 id="31-motivation">3.1 Motivation</h2>
+<p>The main purpose of modulating signals is to bring the signal up to a higher frequency band - to understand why this is valuable, consider the length of the antenna required to transmit a signal of frequency $f$. The signal is transmitted as an electromagnetic wave, with wavelength $\lambda$ given by
+</p>
+$$\lambda=\frac{c}{f}=\frac{3\cdot 10^8}{f}$$<p>.</p>
+<p>A fundamental result from studying electromagnetism is that the dipole antenna structure resonates at wavelengths that obey the following relationship, with $L$ being the length of the antenna:
+</p>
+$$L=n\frac{\lambda}{4}, \forall n = 1,2,3...$$<p>However, most signals that we wish to transmit require huge antennae lengths - for example, the human voice operates just up to about $f=6kHz$ or so. This requires an antenna length of AT LEAST 12.5 km!</p>
+<p>Antennae of this size are not only impractical to construct and operate - they also have such high parasitic losses that it would be extremely hard to properly power. Therefore, if we could move the &ldquo;baseband&rdquo; signal up to a higher frequency, we could make practical, efficient antennas. An extra bonus is the ability to separate signals that are transmitted at the same time from one another - we can allocate different frequency bands for different uses, allowing anyone to tune into any given band at any time to receive or transmit on that band&hellip; provided they have permission/licensing.</p>
+<h2 id="32-the-modulation-property-of-the-fourier-transform">3.2 The Modulation Property of the Fourier Transform</h2>
+<p>Recall from signals and systems:
+</p>
+$$\mathcal{F}\{x(t)cos(2\pi f_ct)\}=\frac{1}{2}\mathcal{F}\{x(t)(e^{j2\pi f_c t} + e^{-2\pi f_c t})\}=\frac{1}{2}X(f)*(\delta(f+f_c) + \delta(f-f_c))=\frac{1}{2}(X(f+f_c) + X(f-f_c))$$<p>This allows us to modulate signals.</p>
+<h2 id="33-sine-waves-as-a-choice-for-modulation">3.3 Sine Waves as a Choice for Modulation</h2>
+<p>It is important to examine the prevalence of multiplication by the sine wave for modulation. Indeed, it seems that any high frequency periodic signal could give us a modulated signal (by the fourier series), so why sine waves in particular?</p>
+<ol>
+<li>Frequency is invariant to linear systems</li>
+<li>Generation of sinusoids is easy</li>
+<li>Sinusoids take up minimal bandwidth themselves.</li>
+</ol>
+<h1 id="4-going-forward">4 Going Forward</h1>
+<p>There are two types of analog modulation that will be discussed in this course:</p>
+<ul>
+<li>Amplitude Modulation</li>
+<li>Frequency Modulation</li>
+</ul>
 			</div>
 			
 		</article>

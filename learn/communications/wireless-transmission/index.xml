@@ -1,54 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Digital Signal Processing on Tim Ausec</title>
+    <title>Wireless Transmission on Tim Ausec</title>
     <link>https://ausectj.com/learn/communications/wireless-transmission/</link>
-    <description>Recent content in Digital Signal Processing on Tim Ausec</description>
+    <description>Recent content in Wireless Transmission on Tim Ausec</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Jul 2025 14:14:25 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 02 Nov 2025 12:00:00 -0400</lastBuildDate>
     <atom:link href="https://ausectj.com/learn/communications/wireless-transmission/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>ECE440 Week 1</title>
-      <link>https://ausectj.com/learn/communications/wireless-transmission/week-1/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-1/</guid>
+      <title>ECE440 Week 10: General Coding Theory</title>
+      <link>https://ausectj.com/learn/communications/wireless-transmission/week-10/</link>
+      <pubDate>Sun, 02 Nov 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-10/</guid>
       <description></description>
     </item>
     <item>
-      <title>ECE440 Week 2</title>
+      <title>ECE440 Week 2: DSB-SC Modulation</title>
       <link>https://ausectj.com/learn/communications/wireless-transmission/week-2/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
+      <pubDate>Sun, 07 Sep 2025 12:00:00 -0400</pubDate>
       <guid>https://ausectj.com/learn/communications/wireless-transmission/week-2/</guid>
-      <description></description>
+      <description>&lt;p&gt;An introduction to Double SideBand - Suppressed Carrier (DSB-SC) modulation and various methods of generation.&lt;/p&gt;&#xA;&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/DSB-SC%20Summary.png&#34;&#xA;    alt=&#34;System-level view of transmission systems&#34; width=&#34;750&#34;&gt;&#xA;&lt;/figure&gt;</description>
     </item>
     <item>
-      <title>ECE440 Week 3</title>
-      <link>https://ausectj.com/learn/communications/wireless-transmission/week-3/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-3/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>ECE440 Week 4</title>
-      <link>https://ausectj.com/learn/communications/wireless-transmission/week-4/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-4/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>ECE440 Week 5</title>
-      <link>https://ausectj.com/learn/communications/wireless-transmission/week-5/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-5/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>ECE440 Week 6</title>
-      <link>https://ausectj.com/learn/communications/wireless-transmission/week-6/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-6/</guid>
-      <description></description>
+      <title>ECE440 Week 1: Introduction to Wireless Transmission</title>
+      <link>https://ausectj.com/learn/communications/wireless-transmission/week-1/</link>
+      <pubDate>Sun, 31 Aug 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-1/</guid>
+      <description>&lt;p&gt;An introduction to wireless transmission.&lt;/p&gt;&#xA;&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/ECE440_Intro_System.png&#34;&#xA;    alt=&#34;System-level view of transmission systems&#34; width=&#34;500&#34;&gt;&#xA;&lt;/figure&gt;</description>
     </item>
   </channel>
 </rss>

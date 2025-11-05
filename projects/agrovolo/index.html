@@ -45,14 +45,15 @@
 	<main>
 		<article>
 			<h1>Agrovolo</h1>
-			<time datetime="2025-09-17T23:28:00">17.09.2025 23:28</time>
+			<time datetime="2025-10-24T12:00:00">24.10.2025 12:00</time>
 			<div>
 				<figure><img src="/images/Agrovolo_Prototype.png"
     alt="Agrovolo Picture" width="500">
 </figure>
 
 <p>Agrovolo is a one-stop-shop solution for aerial imaging data targeted at agriculture / land management use cases.</p>
-<h1 id="background">Background</h1>
+<h1 id="1-background">1. Background</h1>
+<hr>
 <p>Precision agriculture is the practice of utilizing data to make informed land management decisions. This approach to land management promises to make farming operations more efficient and environmentally friendly by identifying overuse of resources, such as fertilizers and irrigation. However, current solutions are often piecemeal. This project aims to prove that fully integrated land management data solutions are possible.</p>
 <p>This is accomplished in a very narrow, concrete context: acquiring a visualization of the Normalized Difference Vegatative Index (NDVI) over a field from raw aerial data.</p>
 <p>Aerial data is incredibly useful in land management decisions, as it offers a way for managers to get a grasp on their land in an intuitive manner. The NDVI is a value that ranges from -1 to +1 that contains information about the vegetative biomass at specific points of your plot. The index is defined as follows:</p>
@@ -67,15 +68,32 @@ $$NDVI = \frac{NIR-Red}{NIR+Red}$$<p>How does this seemingly arbitrary fraction 
     alt="Agrovolo Picture" width="500">
 </figure>
 
-<h1 id="mission">Mission</h1>
+<h1 id="2-mission">2. Mission</h1>
+<hr>
 <p>To develop an autonomous UAV that utilizes remote sensing techniques to create a high-quality map of the Normalized Difference Vegatative Index for any plot of land at any time.</p>
-<h1 id="system-overview">System Overview</h1>
+<p>To be more specific, the following goals shall be met in order for the system to be considered successful:</p>
+<ol>
+<li>Field Size - the system shall be capable of acquiring data of 100 acres within 30 minutes.</li>
+<li>Cost - the system shall cost less than $750 to manufacture.</li>
+<li>User interaction - the system shall be</li>
+</ol>
+<h1 id="3-system-overview">3. System Overview</h1>
+<hr>
+<p>The block diagram for the system is shown below.</p>
 <figure><img src="/images/Agrovolo_SBD.png"
     alt="Agrovolo Picture" width="1000">
 </figure>
 
-<h1 id="uav">UAV</h1>
-<h2 id="imaging-system">Imaging System</h2>
+<h1 id="4-uav">4. UAV</h1>
+<hr>
+<h2 id="41-system-level-requirements">4.1 System-Level Requirements</h2>
+<p>The following system-level requirements are derived from the goals listed in the &ldquo;Mission&rdquo; section:</p>
+<ol>
+<li>Speed: The UAV shall be able to cruise at up to 20 meters per second.</li>
+<li>Power Consumption:</li>
+<li>Acceleration: The system shall be able to generate</li>
+</ol>
+<h2 id="42-imaging-system">4.2 Imaging System</h2>
 <p>The imaging system is comprised of:</p>
 <ol>
 <li>Image processing and storage: 1 Raspberry Pi 5</li>
@@ -83,9 +101,12 @@ $$NDVI = \frac{NIR-Red}{NIR+Red}$$<p>How does this seemingly arbitrary fraction 
 <li>Red camera: 1 PiCam V2</li>
 </ol>
 <p>These components were chosen for the existing tooling available to take, process, and store images.</p>
-<h3 id="image-processing-and-storage">Image Processing and Storage</h3>
+<h3 id="421-image-processing-and-storage">4.2.1 Image Processing and Storage</h3>
 <p>The <a href="https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf">existing PiCam tooling</a> makes collecting, manipulating, and storing data from the cameras a breeze. Images are stored as 3-D arrays in the form [x,y,(r,g,b)], allowing the creation of a greyscale NDVI with incredible ease.</p>
-<p>To create the color map, consider the following representation of RGB color space:</p>
+<p>In order to generate a map that is easier to read, we map the NDVI to a color wheel, where $-1$ gives red, and $+1$ gives blue. This is called a color map.</p>
+<p>There are many color maps to choose from. The following is an illustrative example:</p>
+<h4 id="example-start">&lt;example start&gt;</h4>
+<p>Consider the following representation of RGB color space:</p>
 <figure><img src="/images/RGB-color-space.png"
     alt="Agrovolo Picture" width="500">
 </figure>
@@ -102,16 +123,24 @@ $$\theta = m\cdot NDVI+b$$<p>
 Solving, we obtain
 </p>
 $$c(NDVI)=(I_{max}cos(\frac{\pi}{4}(NDVI+1)),I_{max}sin(\frac{\pi}{4}(NDVI+1)),0)$$<p>In general, $\theta$ doesn&rsquo;t have to be a linear function of $NDVI$. We can choose any function we&rsquo;d like - linear is just the simplest.</p>
+<h4 id="example-end">&lt;example end&gt;</h4>
 <p>The challenges arise from the following requirements:</p>
 <ol>
 <li>If the whole plot cannot be collected in one picture, the system shall take multiple pictures and stitch them into one NDVI plot.</li>
 <li>The data should be stored on a removable data volume, such as an SD card or a USB drive.</li>
 <li>The system shall be powered from a 4S, 1.5Ah LiPo battery.</li>
 </ol>
-<h3 id="nir-camera">NIR Camera</h3>
-<h2 id="flight-controller">Flight Controller</h2>
+<h4 id="4211-image-stitching">4.2.1.1 Image Stitching</h4>
+<h4 id="4212-data-transmission">4.2.1.2 Data Transmission</h4>
+<h4 id="4213-power-consumption">4.2.1.3 Power Consumption</h4>
+<h3 id="422-nir-camera">4.2.2 NIR Camera</h3>
+<h3 id="423-red-camera">4.2.3 Red Camera</h3>
+<h2 id="43-flight-controller">4.3 Flight Controller</h2>
+<h2 id="44-transceiver">4.4 Transceiver</h2>
 <h1 id="ground-station">Ground Station</h1>
+<hr>
 <h1 id="major-challenges">Major Challenges</h1>
+<hr>
 <h1 id="future-work">Future Work</h1>
 			</div>
 			

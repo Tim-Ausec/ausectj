@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ECE538 Week 9:</title>
+	
+	
+	<link rel="stylesheet" href="/css/style.css">
+	
+	
+    	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['$$', '$$']],  
+      inlineMath: [['$', '$']]                  
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+	
+</head>
+<body>
+	<header>
+	<nav>
+	
+			
+			<a href="/">Home</a>
+			
+			<a href="/learn">Learn</a>
+			
+			<a href="/posts">Posts</a>
+			
+			<a href="/projects">Projects</a>
+			
+	</nav>
+	
+	<hr>
+</header>
+
+	
+	<main>
+		<article>
+			<h1>ECE538 Week 9:</h1>
+			<time datetime="2025-10-26T12:00:00">26.10.2025 12:00</time>
+			<div>
+				<p>The purpose of this week is to understand digital subbanding and single-sideband modulation.</p>
+<figure><img src="/images/538-Subbanding-Summary.png"
+    alt="System-level view of transmission systems" width="500">
+</figure>
+
+<h1 id="1-digital-subbanding">1. Digital SubBanding</h1>
+<p>The purpose of digital subbanding is to carry $L$ signals in one time-domain signal.</p>
+<figure><img src="/images/538-Subbanding.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>Since each signal can have bandwidth up to $\pi$, we must first compress the spectrums, modulate them to the appropriate bands, and then add the results.</p>
+<p>Using the naieve approach to upsampling, the below schematic representation of the process is created:</p>
+<figure><img src="/images/538-Subbanding-Naieve.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>However, there is a much more efficient method. First, substitute the efficient method of upsampling into the diagram:</p>
+<figure><img src="/images/538-Subbanding-Efficient-Step1.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>Since there is so much going on here, let&rsquo;s focus on one input signal. Notice that by linearity, we can break the final modulating sine wave into each respective polyphase filter branch. Since the output of each filter branch only sees the cosine according to the frequency of the interleaver, we have to take into account the differences between each sine wave. The below figure shows the result.</p>
+<figure><img src="/images/538-Subbanding-Efficient-Step2.png"
+    alt="System-level view of transmission systems" width="1250">
+</figure>
+
+<p>Finally, let&rsquo;s look at the whole system, but only when the interleaver is connected to one polyphase filter branch. The lefthand side of the below figure shows this:</p>
+<figure><img src="/images/538-Subbanding-Efficient.png"
+    alt="System-level view of transmission systems" width="1250">
+</figure>
+
+<p>Reading the left hand side of the figure, we can see
+</p>
+$$y_l[n]=(\sum_{k=0}^{L-1}x_k[n]e^{j\frac{2\pi}{L}lk}*h_l[n])$$<p>With the distributive property, we see:
+</p>
+$$y_l[n]=h_l[n]*\sum_{k=0}^{L-1}x_k[n]e^{j\frac{2\pi}{L}lk}$$<p>Which is exactly what is shown for each polyphase branch in the right hand side of the above figure. To acquire $y[n]$ from $y_l[n]$, we interleave, as disucssed last week.</p>
+<p>To succinctly summarize this system, we define:</p>
+$$
+\mathbf{x}=\begin{bmatrix}
+x_0[n] \\
+... \\
+x_k[n] \\
+... \\
+x_{L-1}[n]
+\end{bmatrix}
+$$$$
+\mathbf{a}=\begin{bmatrix}
+1 & 1 & ... & 1\\
+1 & e^{j\frac{2\pi}{L}} & ... & e^{j\frac{2\pi}{L}(L-1)} \\
+... & ... & e^{j\frac{2\pi}{L}lk} & ... \\
+1 & ... & ... & e^{j\frac{2\pi}{L}(L-1)(L-1)} \\
+\end{bmatrix}
+$$$$
+\mathbf{h}=\begin{bmatrix}
+h_0[n] \\
+... \\
+h_k[n] \\
+... \\
+h_{L-1}[n]
+\end{bmatrix}
+$$$$
+\mathbf{y}=\begin{bmatrix}
+y_0[n] \\
+... \\
+y_k[n] \\
+... \\
+y_{L-1}[n]
+\end{bmatrix}
+$$<p>These are related by
+</p>
+$$\mathbf{y}=(\mathbf{a}\mathbf{x}) .* \mathbf{h}$$<p>Where the $.*$ represents pointwise convolution.</p>
+<h1 id="2-ssb-modulation">2. SSB Modulation</h1>
+<p>In this context, the purpose of single side-band (SSB) modulation is to make a signal real-valued to improve the memory efficiency of modulated signals.</p>
+<p>Recall that the fourier transform of a real valued signal obeys hemertian symmetry:
+</p>
+$$h(t) \in \mathbb{R} \Rightarrow H^*(\omega)=H(-\omega) \Rightarrow |H(\omega)|=|H(-\omega)|$$<p>So, upon observation of the below figure, it is clear that the top spectrum is a complex signal, which requires storing twice the amount of numbers as a real valued signal. Therefore, it is desirable to have the bottom spectrum, which is the purpose of SSB modulation.</p>
+<figure><img src="/images/538-Subbanding-Summary.png"
+    alt="System-level view of transmission systems" width="500">
+</figure>
+
+<p>First, some vocabulary: a DSB-SC modulated signal has two &ldquo;bands,&rdquo; the lower side band (LSB) and the upper side band (USB).</p>
+<figure><img src="/images/538-SSB-Example.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>Let&rsquo;s take the example of the USB for now. A feasible method of acquiring the USB is to pass it through a filter with a frequency response of the below rectangle:</p>
+<figure><img src="/images/538-SSB-HCBF.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>This filter can be expressed as
+</p>
+$$h_{HCBF}[n]=2\frac{sin(\frac{\pi}{2}n)}{\pi n}e^{j\frac{\pi}{2}}$$<p>Notice that this can be simplified into the following expression:
+</p>
+$$h_{HCBF}[n]=2\frac{sin(\frac{\pi}{2}n)}{\pi n}(cos(\frac{\pi}{2}n)+jsin(\frac{\pi}{2}n))=2\frac{sin(\frac{\pi}{2}n)}{\pi n}cos(\frac{\pi}{2}n)+j2\frac{sin(\frac{\pi}{2}n)}{\pi n}sin(\frac{\pi}{2}n)=\frac{sin(\pi n)}{\pi n}+j2\frac{sin^2(\frac{\pi}{2}n)}{\pi n}=\delta[n]+j2\frac{sin^2(\frac{\pi}{2}n)}{\pi n}$$<p>We shall examine the imaginary term of this expression. It is best to imagine this as a sinc pulse modulated by $sin(\frac{\pi}{2}n)$. Recall that this is $\frac{1}{2j}(\delta(\omega-\frac{\pi}{2})+\delta(\omega+\frac{\pi}{2}))$. Therefore, this term looks as follows:</p>
+<figure><img src="/images/538-SSB-Hilbert.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>We call this term the Hilbert transform. Thus, we have:
+</p>
+$$h_{HCBF}[n]=\delta[n]+jh_{HT}[n]$$<p>Now, let the output of this filter be:
+</p>
+$$\tilde{x}[n]=x[n]*h_{HCBF}[n]=x[n]+j\hat{x}[n]$$<p>
+With $\hat{x}[n]$ being the hilbert transform of $x[n]$</p>
+<p>In order to make this signal real, it would be nice if we had a signal such as follows:
+</p>
+$$Z(\omega)=\frac{1}{2}[\tilde{X}(\omega)e^{j\omega_c n}+\tilde{X}^*(-\omega)e^{-j\omega_c n}]$$<p>
+Because this signal is exactly what we would like: a real-valued SSB signal.</p>
+<p>Additionally, notice that:
+</p>
+$$Re\{x(t)\}=\frac{1}{2}[x(t)+x^*(t)]$$<p>
+</p>
+$$\mathcal{F}\{x^*(t)\}=X^*(-\omega)$$<p>Thus, we desire
+</p>
+$$Re\{\tilde{x}[n]e^{j\omega_c n}\}=Re\{(x[n]+j\hat{x}[n])(cos(\omega_c n)+jsin(\omega_c n))\}=x[n]cos(\omega_c n) - \hat{x}[n]sin(\omega_c n)$$<p>
+Notice that this is an all-real term, and as such we have acquired what we wanted:
+</p>
+$$\boxed{z_{USB}[n]=[n]cos(\omega_c n) - \hat{x}[n]sin(\omega_c n)}$$<p>
+</p>
+$$\boxed{z_{LSB}[n]=[n]cos(\omega_c n) + \hat{x}[n]sin(\omega_c n)}$$<p>
+The same procedure can be followed to obtain the LSB expression, where $h_{HCBF}[n]$ instead passes the negative frequencies, resulting in a sign change on the hilbert transform term.</p>
+<h1 id="3-efficient-ssb-based-digital-subbanding">3. Efficient SSB-Based Digital Subbanding</h1>
+<p>We now wish to construct a general method for subbanding $L$ signals with SSB modulation. In fact, we are one simple step yet from the proper implementation. Recall the efficient digital subbanding method described in section 1, summarized as</p>
+$$\mathbf{y}=(\mathbf{a}\mathbf{x}) .* \mathbf{h}$$<p>Section 2 has allowed us to make the $\mathbf{a}\mathbf{x}$ term into a real-valued signal.</p>
+<p>In our notation, we want:
+</p>
+$$\mathbf{z}=Re\{\mathbf{a}\tilde{\mathbf{x}}\} .* \mathbf{h}$$<p>Writing this out in full:</p>
+$$
+\begin{bmatrix}
+z_0[n] \\
+... \\
+z_k[n] \\
+... \\
+z_{L-1}[n]
+\end{bmatrix}
+= Re\{(\begin{bmatrix}
+1 & 1 & ... & 1\\
+1 & cos(\frac{2\pi}{L}) & ... & cos(\frac{2\pi}{L}(L-1)) \\
+... & ... & cos(\frac{2\pi}{L}lk) & ... \\
+1 & ... & ... & cos(\frac{2\pi}{L}(L-1)(L-1)) \\
+\end{bmatrix}
++j\begin{bmatrix}
+0 & 0 & ... & 0\\
+0 & sin(\frac{2\pi}{L}) & ... & sin(\frac{2\pi}{L}(L-1)) \\
+... & ... & sin(\frac{2\pi}{L}lk) & ... \\
+0 & ... & ... & sin(\frac{2\pi}{L}(L-1)(L-1)) \\
+\end{bmatrix})
+(\begin{bmatrix}
+x_0[n] \\
+... \\
+x_k[n] \\
+... \\
+x_{L-1}[n]
+\end{bmatrix}
++j\begin{bmatrix}
+\hat{x}_0[n] \\
+... \\
+\hat{x}_k[n] \\
+... \\
+\hat{x}_{L-1}[n]
+\end{bmatrix})\}
+.* \begin{bmatrix}
+h_0[n] \\
+... \\
+h_k[n] \\
+... \\
+h_{L-1}[n]
+\end{bmatrix}
+$$<p>Let
+</p>
+$$
+\mathbf{C}= \begin{bmatrix}
+1 & 1 & ... & 1\\
+1 & cos(\frac{2\pi}{L}) & ... & cos(\frac{2\pi}{L}(L-1)) \\
+... & ... & cos(\frac{2\pi}{L}lk) & ... \\
+1 & ... & ... & cos(\frac{2\pi}{L}(L-1)(L-1)) \\
+\end{bmatrix}
+$$<p>
+</p>
+$$
+\mathbf{S}=\begin{bmatrix}
+0 & 0 & ... & 0\\
+0 & sin(\frac{2\pi}{L}) & ... & sin(\frac{2\pi}{L}(L-1)) \\
+... & ... & sin(\frac{2\pi}{L}lk) & ... \\
+0 & ... & ... & sin(\frac{2\pi}{L}(L-1)(L-1)) \\
+\end{bmatrix}
+$$<p>
+</p>
+$$
+\hat{\mathbf{x}}=\begin{bmatrix}
+\hat{x}_0[n] \\
+... \\
+\hat{x}_k[n] \\
+... \\
+\hat{x}_{L-1}[n]
+\end{bmatrix}
+$$<p>
+Then we have
+</p>
+$$\boxed{\mathbf{z_{USB}}=(\mathbf{C}\mathbf{x}-\mathbf{S}\mathbf{\hat{x}}) .* \mathbf{h}}$$<p>
+</p>
+$$\boxed{\mathbf{z_{LSB}}=(\mathbf{C}\mathbf{x}+\mathbf{S}\mathbf{\hat{x}}) .* \mathbf{h}}$$<h1 id="4-misc">4. Misc</h1>
+<p>There are actually many methods to generate SSB signals, especially for analog signals. The method covered here is called the &ldquo;phase shift method,&rdquo; since it makes use of using the hilbert transform to change the phase of an incoming signal. This method is shown schematically below. More of this is covered in ECE 440 notes.</p>
+<figure><img src="/images/538-SSB-Phase.png"
+    alt="System-level view of transmission systems" width="500">
+</figure>
+			</div>
+			
+		</article>
+	</main>
+
+	<footer>
+	<p>&copy; 2025 <a href="https://ausectj.com/">Tim Ausec</a></p>
+</footer>
+
+</body>
+</html>

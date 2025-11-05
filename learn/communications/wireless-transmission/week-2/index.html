@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ECE440 Week 2</title>
+	<title>ECE440 Week 2: DSB-SC Modulation</title>
 	
 	
 	<link rel="stylesheet" href="/css/style.css">
@@ -44,10 +44,209 @@
 	
 	<main>
 		<article>
-			<h1>ECE440 Week 2</h1>
-			<time datetime="2025-07-13T14:14:25">13.07.2025 14:14</time>
+			<h1>ECE440 Week 2: DSB-SC Modulation</h1>
+			<time datetime="2025-09-07T12:00:00">07.09.2025 12:00</time>
 			<div>
-				
+				<p>An introduction to Double SideBand - Suppressed Carrier (DSB-SC) modulation and various methods of generation.</p>
+<figure><img src="/images/DSB-SC%20Summary.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<h1 id="1-ideal-dsb-sc">1. Ideal DSB-SC</h1>
+<h2 id="11-ideal-modulation">1.1 Ideal Modulation</h2>
+<p>The modulation of a DSB-SC signal is as simple as it gets - just multiply the message $m(t)$ by a sine wave, called the carrier. The frequency of the carrier is called, drumroll please, the carrier frequency $f_c$.</p>
+<figure><img src="/images/DSB-SC-Mixer.png"
+    alt="System-level view of transmission systems" width="500">
+</figure>
+
+<p>By the modulation property of the Fourier transform, it can be seen that the resulting waveform moves the message signal from the original baseband frequency range to a higher frequency range around the carrier frequency.</p>
+<figure><img src="/images/DSB-SC-Frequency.png"
+    alt="System-level view of transmission systems" width="1000">
+</figure>
+
+<p>The below figures show what this modulation looks like in the time domain. The amplitude of the carrier can be seen varying as the message signal varies. This hints at a relationship with amplitude modulation (AM), and this relationship is in fact why we are bothering to study DSB-SC at all.</p>
+<p>The first figure shows a DSB-SC signal with a carrier frequency of only 10x that of the message signal. As such, it is relatively easy to make out the carrier and message, but the carrier frequency of 50kHz still requires an antenna that is at least 1.5km long.</p>
+<figure><img src="/images/DSB-SC-50k-Fig.png"
+    alt="System-level view of transmission systems" width="500">
+</figure>
+
+<p>The second figure shows a much more realistic DSB-SC signal with a carrier at a frequency of 1MHz, which is right in the middle of the AM band in the USA. This brings our required antenna size down to 75m.</p>
+<p><em>(<a href="https://progressive-concepts.com/product/isotron-am-broadcast-antennas/">Higher-power transmit antennae</a> will be in the ballpark of 30m to 140m, but receive antennae don&rsquo;t need to be so large. In fact, the FCC limits most AM antennae to being at most 3m long. <a href="https://forum.allaboutcircuits.com/threads/how-long-does-my-am-radio-receiver-antenna-wire-need-to-be.116067/">For more discussion on this topic</a>)</em></p>
+<figure><img src="/images/DSB-SC-1M-Fig.png"
+    alt="System-level view of transmission systems" width="500">
+</figure>
+
+<p>The third figure zooms in on one half period of the second to show that you can still make out the carrier.</p>
+<figure><img src="/images/DSB-SC-Zoom-Fig.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<h2 id="12-ideal-demodulation">1.2 Ideal Demodulation</h2>
+<p>The demodulation of a DSB-SC signal is quite simple as well - multiply again by a sine wave of the carrier frequency, and pass the result through a band pass filter.</p>
+<figure><img src="/images/DSB-SC-Demodulator.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>By applying the modulation property again, it can be seen that half of the original signal power is recovered in the baseband after multiplication by the carrier.</p>
+<figure><img src="/images/DSB-SC%20Demodulation%20Frequency.png"
+    alt="System-level view of transmission systems" width="1000">
+</figure>
+
+<h2 id="13-circuit-implementation">1.3 Circuit Implementation</h2>
+<figure><img src="/images/DSB-SC-Multiplier.png"
+    alt="System-level view of transmission systems" width="500">
+</figure>
+
+<p>This circuit has transfer function:
+</p>
+$$v_b=v_1\cdot v_2$$<p>
+And as such can be easily used to implement multiplication by the carrier.</p>
+<h1 id="2-nonlinear-dsb-sc-modulation">2. Nonlinear DSB-SC Modulation</h1>
+<p>This method of modulation makes use of nonlinear circuit elements, such as a diode or transistor.</p>
+<p>The transfer function of the nonlinear elements is approximated with a power series:
+</p>
+$$y_i(t)=ax_i(t)+bx_i(t)^2$$<figure><img src="/images/DSB-SC-Nonlinear.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>To analyze this system, work block-by-block:</p>
+$$x_1(t)=m(t)+cos(2\pi f_c t)$$<p>
+</p>
+$$x_2(t)=cos(2\pi f_c t)-m(t)$$<p>
+</p>
+$$y_1(t)=a(m(t)+cos(2\pi f_c t))+b(m^2(t)+2m(t)cos(2\pi f_c t)+cos^2(2\pi f_c t))$$<p>
+</p>
+$$y_2(t)=a(cos(2\pi f_c t)-m(t))+b(m^2(t)-2m(t)cos(2\pi f_c t)+cos^2(2\pi f_c t))$$<p>
+</p>
+$$z(t)=2am(t)+4bm(t)cos(2\pi f_c t)$$<p>
+The BPF filters the $2am(t)$ term, leaving us with
+</p>
+$$4bm(t)cos(2\pi f_ct)$$<h1 id="3-rectangular-carrier">3. Rectangular Carrier</h1>
+<p>The rectangular time-domain waveform with duty cycle $D$ and period $T_c$ can be expressed as
+</p>
+$$w(t) = \sum_{k=-\infty}^{\infty}rect(\frac{t-kT_c}{DT_c})$$<p>
+Since $w(t)$ is a periodic and even function, we can write this waveform with a cosine fourier series:
+</p>
+$$w(t)=\sum_{k=0}^{\infty}w_kcos(2\pi kf_ct)$$<p>
+When we use $w(t)$ as the carrier, we get
+</p>
+$$w(t)m(t)=\sum_{k=0}^{\infty}w_km(t)cos(2\pi kf_ct)$$<p>
+Passing this through a bandpass filter, we obtain
+</p>
+$$w_1m(t)cos(2\pi kf_ct)$$<p>
+Which we can then transmit.</p>
+<h2 id="31-frequency-domain-analysis">3.1 Frequency Domain Analysis</h2>
+<p>By the modulation property:</p>
+$$\mathcal{F}\{w(t)m(t)\}=\sum_{k=0}^{\infty}\frac{w_k}{2}[M(f-kf_c)+M(f+kf_c)]$$<figure><img src="/images/DSB-SC-Rect-Spect.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<h2 id="32-time-domain-analysis">3.2 Time Domain Analysis</h2>
+<p>The below figures show what the time domain signals look like in this process:</p>
+<p>The first figure shows the $w(t)m(t)$ signal and the original $m(t)$ signal.</p>
+<figure><img src="/images/DSB-SC-Rect.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>The second figure includes the carrier and scales the other two traces to make everything more visible.</p>
+<figure><img src="/images/DSB-SC-Rect2.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<p>The third figure shows the result of passing $w(t)m(t)$ through a bandpass filter. You can observe some delay due to the filter, and some distortion due to the inability to use a perfect filter.</p>
+<figure><img src="/images/DSB-SC-Rect-Filt.png"
+    alt="System-level view of transmission systems" width="750">
+</figure>
+
+<h1 id="4-code">4. Code</h1>
+<p>Below is the code used to generate the above plots.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> scipy <span style="color:#f92672">import</span> signal
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> multipledispatch <span style="color:#f92672">import</span> dispatch
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@dispatch</span>(np<span style="color:#f92672">.</span>ndarray,np<span style="color:#f92672">.</span>ndarray, np<span style="color:#f92672">.</span>ndarray, np<span style="color:#f92672">.</span>ndarray, str)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plotFunction</span>(t,y1, y2, y3, title):
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>figure()
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>plot(t,y1, <span style="color:#e6db74">&#34;r&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;TX&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>plot(t,y2, <span style="color:#e6db74">&#34;k&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Message&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>plot(t,y3, <span style="color:#e6db74">&#34;b&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Carrier&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>title(title)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>legend(loc <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;upper right&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Time (Message Periods)&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Ampltidue&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@dispatch</span>(np<span style="color:#f92672">.</span>ndarray,np<span style="color:#f92672">.</span>ndarray, np<span style="color:#f92672">.</span>ndarray, str)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plotFunction</span>(t,y1, y2, title):
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>figure()
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>plot(t,y1, <span style="color:#e6db74">&#34;r&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;TX&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>plot(t,y2, <span style="color:#e6db74">&#34;k&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Message&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>title(title)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>legend(loc <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;upper right&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Time (Message Periods)&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Ampltidue&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@dispatch</span>(np<span style="color:#f92672">.</span>ndarray,np<span style="color:#f92672">.</span>ndarray, str)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plotFunction</span>(t,y, title):
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>figure()
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>plot(t,y, <span style="color:#e6db74">&#34;r&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;TX&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>title(title)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Time (Message Periods)&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Ampltidue&#34;</span>)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ideal</span>():
+</span></span><span style="display:flex;"><span>        fm <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">3</span> <span style="color:#75715e"># 5kHz</span>
+</span></span><span style="display:flex;"><span>        fc <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">6</span> <span style="color:#75715e"># 1MHz</span>
+</span></span><span style="display:flex;"><span>        t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">4</span><span style="color:#f92672">/</span>fm,<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>fc)
+</span></span><span style="display:flex;"><span>        T <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>fc)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        m <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>cos(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi<span style="color:#f92672">*</span>fm<span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>        c1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>cos(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi<span style="color:#f92672">*</span>fc<span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>        r1<span style="color:#f92672">=</span> m<span style="color:#f92672">*</span>c1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        plotFunction(T, r1, m, <span style="color:#e6db74">&#34;5kHz Message, 1MHz carrier, DSB-SC Signal&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        fc <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">3</span> <span style="color:#75715e"># 50kHz</span>
+</span></span><span style="display:flex;"><span>        c2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>cos(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi<span style="color:#f92672">*</span>fc<span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>        r2 <span style="color:#f92672">=</span> m<span style="color:#f92672">*</span>c2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        plotFunction(T, r2, m, <span style="color:#e6db74">&#34;5kHz Message, 50kHz carrier, DSB-SC Signal&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rectangle</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># need to change frequencies to lower bound so nyquist rate is lower and therefore convolution doesn&#39;t take so long</span>
+</span></span><span style="display:flex;"><span>        fm <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> <span style="color:#75715e"># 5Hz</span>
+</span></span><span style="display:flex;"><span>        fc <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># 100Hz</span>
+</span></span><span style="display:flex;"><span>        Fs <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">*</span>fc
+</span></span><span style="display:flex;"><span>        T <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">4</span>,Fs)
+</span></span><span style="display:flex;"><span>        t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">400</span>,<span style="color:#ae81ff">400</span>,Fs)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        m <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>cos(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi<span style="color:#f92672">*</span>fm<span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>        c <span style="color:#f92672">=</span> signal<span style="color:#f92672">.</span>square(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi<span style="color:#f92672">*</span>fc<span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>        r<span style="color:#f92672">=</span> m<span style="color:#f92672">*</span>c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        plotFunction(T, r, m, <span style="color:#e6db74">&#34;5kHz Message, 100kHz carrier, Rectangular Carrier&#34;</span>)
+</span></span><span style="display:flex;"><span>        plotFunction(T, r, m, <span style="color:#ae81ff">0.5</span><span style="color:#f92672">*</span>c, <span style="color:#e6db74">&#34;5kHz Message, 100kHz carrier, Rectangular Carrier&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        h <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi<span style="color:#f92672">*</span>(fm<span style="color:#f92672">/</span>Fs)<span style="color:#f92672">*</span>t)<span style="color:#f92672">/</span>(np<span style="color:#f92672">.</span>pi<span style="color:#f92672">*</span>t)<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi<span style="color:#f92672">*</span>(fc<span style="color:#f92672">/</span>Fs)<span style="color:#f92672">*</span>t) <span style="color:#75715e"># bandpass by sinc and modulation property</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        plotFunction(t,h,<span style="color:#e6db74">&#34;Filter impulse response&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>convolve(r,h) <span style="color:#75715e"># put through filter</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        margin <span style="color:#f92672">=</span> len(y)<span style="color:#f92672">-</span>len(t)
+</span></span><span style="display:flex;"><span>        y1 <span style="color:#f92672">=</span> y[margin<span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>:len(y)<span style="color:#f92672">-</span>margin<span style="color:#f92672">//</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        plotFunction(T,y1,m,<span style="color:#e6db74">&#34;filter output&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ideal()
+</span></span><span style="display:flex;"><span>    rectangle()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;done&#34;</span>)
+</span></span></code></pre></div>
 			</div>
 			
 		</article>

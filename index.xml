@@ -6,105 +6,119 @@
     <description>Recent content on Tim Ausec</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Oct 2025 16:22:00 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 02 Nov 2025 12:00:00 -0400</lastBuildDate>
     <atom:link href="https://ausectj.com/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Bar-Spring-Problem</title>
-      <link>https://ausectj.com/learn/statics/bar-spring-problem/</link>
-      <pubDate>Thu, 02 Oct 2025 16:22:00 -0400</pubDate>
-      <guid>https://ausectj.com/learn/statics/bar-spring-problem/</guid>
-      <description>&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/Bar-Spring-Problem.png&#34;&#xA;    alt=&#34;Agrovolo Picture&#34; width=&#34;500&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;Determine $\theta$ when the system reaches equilibrium. $\theta = 0$ when the spring is uncompressed.&lt;/p&gt;</description>
-    </item>
     <item>
       <title>Agrovolo</title>
       <link>https://ausectj.com/projects/agrovolo/</link>
-      <pubDate>Wed, 17 Sep 2025 23:28:00 -0400</pubDate>
+      <pubDate>Fri, 24 Oct 2025 12:00:00 -0400</pubDate>
       <guid>https://ausectj.com/projects/agrovolo/</guid>
       <description>&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/Agrovolo_Prototype.png&#34;&#xA;    alt=&#34;Agrovolo Picture&#34; width=&#34;500&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;Agrovolo is a one-stop-shop solution for aerial imaging data targeted at agriculture / land management use cases.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>ECE440 Week 1</title>
-      <link>https://ausectj.com/learn/communications/wireless-transmission/week-1/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-1/</guid>
+      <title>ECE440 Week 10: General Coding Theory</title>
+      <link>https://ausectj.com/learn/communications/wireless-transmission/week-10/</link>
+      <pubDate>Sun, 02 Nov 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-10/</guid>
       <description></description>
     </item>
     <item>
-      <title>ECE440 Week 2</title>
-      <link>https://ausectj.com/learn/communications/wireless-transmission/week-2/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-2/</guid>
-      <description></description>
+      <title>ECE538 Week 9:</title>
+      <link>https://ausectj.com/learn/communications/digital-signal-processing/week-9/</link>
+      <pubDate>Sun, 26 Oct 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/digital-signal-processing/week-9/</guid>
+      <description>&lt;p&gt;The purpose of this week is to understand digital subbanding and single-sideband modulation.&lt;/p&gt;&#xA;&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/538-Subbanding-Summary.png&#34;&#xA;    alt=&#34;System-level view of transmission systems&#34; width=&#34;500&#34;&gt;&#xA;&lt;/figure&gt;</description>
     </item>
     <item>
-      <title>ECE440 Week 3</title>
-      <link>https://ausectj.com/learn/communications/wireless-transmission/week-3/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-3/</guid>
-      <description></description>
+      <title>Bar-Spring-Problem</title>
+      <link>https://ausectj.com/learn/statics/bar-spring-problem/</link>
+      <pubDate>Fri, 24 Oct 2025 15:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/statics/bar-spring-problem/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/Bar-Spring-Problem.png&#34;&#xA;    alt=&#34;Agrovolo Picture&#34; width=&#34;500&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;Determine $\theta$ when the system reaches equilibrium. $\theta = 0$ when the spring is uncompressed.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>ECE440 Week 4</title>
-      <link>https://ausectj.com/learn/communications/wireless-transmission/week-4/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-4/</guid>
-      <description></description>
+      <title>Personal Financial Tracker and Projector</title>
+      <link>https://ausectj.com/projects/backlog/financial-tracker/</link>
+      <pubDate>Fri, 24 Oct 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/projects/backlog/financial-tracker/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been using an excel sheet to keep track of my finances and predict what they&amp;rsquo;ll look like for about a year and a half now. However, it doesn&amp;rsquo;t work in LibreOffice Calc, so I&amp;rsquo;ll have to make a program to mimic the behavior.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>ECE440 Week 5</title>
-      <link>https://ausectj.com/learn/communications/wireless-transmission/week-5/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-5/</guid>
-      <description></description>
+      <title>ECE538 Week 8: Reconstruction Process and Upsampling</title>
+      <link>https://ausectj.com/learn/communications/digital-signal-processing/week-8/</link>
+      <pubDate>Sun, 19 Oct 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/digital-signal-processing/week-8/</guid>
+      <description>&lt;p&gt;The purpose of this week is to finish up reconstruction and introduce upsampling.&lt;/p&gt;&#xA;&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/538-Upsampling-Naive.png&#34;&#xA;    alt=&#34;System-level view of transmission systems&#34; width=&#34;750&#34;&gt;&#xA;&lt;/figure&gt;</description>
     </item>
     <item>
-      <title>ECE440 Week 6</title>
-      <link>https://ausectj.com/learn/communications/wireless-transmission/week-6/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-6/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>ECE538 Exam 1</title>
-      <link>https://ausectj.com/learn/communications/digital-signal-processing/ece538-exam1/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/digital-signal-processing/ece538-exam1/</guid>
-      <description>&lt;p&gt;Topics and concepts covered in the first 5 weeks of ECE538 at Purdue University.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>ECE538 Week 1: Discrete Time Signals and Systems Basics</title>
-      <link>https://ausectj.com/learn/communications/digital-signal-processing/week-1/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/digital-signal-processing/week-1/</guid>
-      <description>&lt;p&gt;The purpose of this week was to easily slide into the course material and work with convolution in the discrete time case.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>ECE538 Week 2: Autocorrelation and Cross-Correlation</title>
-      <link>https://ausectj.com/learn/communications/digital-signal-processing/week-2/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/digital-signal-processing/week-2/</guid>
-      <description>&lt;p&gt;This is where new content for the course starts. The purpose of this week was to understand autocorrelation, its properties, and its applicatiions.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>ECE538 Week 3: Z-Transform &amp; DT Fourier Transform</title>
-      <link>https://ausectj.com/learn/communications/digital-signal-processing/week-3/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/digital-signal-processing/week-3/</guid>
-      <description>&lt;p&gt;The purpose of this week is to revisit the idea of the Z-transform and DTFT.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>ECE538 Week 4: Frequency Response of LTI Systems</title>
-      <link>https://ausectj.com/learn/communications/digital-signal-processing/week-4/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
-      <guid>https://ausectj.com/learn/communications/digital-signal-processing/week-4/</guid>
-      <description>&lt;p&gt;The purpose of this week was to understand how pole/zero placement of the impulse response can affect the frequency response of an LTI system.&lt;/p&gt;</description>
+      <title>ECE538 Week 7: Sampling Theory Basics</title>
+      <link>https://ausectj.com/learn/communications/digital-signal-processing/week-7/</link>
+      <pubDate>Sun, 12 Oct 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/digital-signal-processing/week-7/</guid>
+      <description>&lt;p&gt;The purpose of this week is to derive the relationship between the CTFT and DTFT, thus dipping our toes into sampling theory.&lt;/p&gt;&#xA;$$\boxed{X_s(\omega F_s) = X(\omega)}$$&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/538-Reconstruction-Flow.png&#34;&#xA;    alt=&#34;System-level view of transmission systems&#34; width=&#34;750&#34;&gt;&#xA;&lt;/figure&gt;</description>
     </item>
     <item>
       <title>ECE538 Week 6: CTFT and D/A Conversion</title>
       <link>https://ausectj.com/learn/communications/digital-signal-processing/week-6/</link>
-      <pubDate>Sun, 13 Jul 2025 14:14:25 -0400</pubDate>
+      <pubDate>Sun, 05 Oct 2025 12:00:00 -0400</pubDate>
       <guid>https://ausectj.com/learn/communications/digital-signal-processing/week-6/</guid>
       <description>&lt;p&gt;The purpose of this week is to revisit the continuous time fourier transform (CTFT) to prepare to understand sampling theory and digital to analog (D/A) conversion.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ECE538 Exam 1</title>
+      <link>https://ausectj.com/learn/communications/digital-signal-processing/ece538-exam1/</link>
+      <pubDate>Sun, 28 Sep 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/digital-signal-processing/ece538-exam1/</guid>
+      <description>&lt;p&gt;Topics and concepts covered in the first 5 weeks of ECE538 at Purdue University.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ECE538 Week 4: Frequency Response of LTI Systems</title>
+      <link>https://ausectj.com/learn/communications/digital-signal-processing/week-4/</link>
+      <pubDate>Sun, 21 Sep 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/digital-signal-processing/week-4/</guid>
+      <description>&lt;p&gt;The purpose of this week was to understand how pole/zero placement of the impulse response can affect the frequency response of an LTI system.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ECE538 Week 3: Z-Transform &amp; DT Fourier Transform</title>
+      <link>https://ausectj.com/learn/communications/digital-signal-processing/week-3/</link>
+      <pubDate>Sun, 14 Sep 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/digital-signal-processing/week-3/</guid>
+      <description>&lt;p&gt;The purpose of this week is to revisit the idea of the Z-transform and DTFT.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ECE440 Week 2: DSB-SC Modulation</title>
+      <link>https://ausectj.com/learn/communications/wireless-transmission/week-2/</link>
+      <pubDate>Sun, 07 Sep 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-2/</guid>
+      <description>&lt;p&gt;An introduction to Double SideBand - Suppressed Carrier (DSB-SC) modulation and various methods of generation.&lt;/p&gt;&#xA;&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/DSB-SC%20Summary.png&#34;&#xA;    alt=&#34;System-level view of transmission systems&#34; width=&#34;750&#34;&gt;&#xA;&lt;/figure&gt;</description>
+    </item>
+    <item>
+      <title>ECE538 Week 2: Autocorrelation and Cross-Correlation</title>
+      <link>https://ausectj.com/learn/communications/digital-signal-processing/week-2/</link>
+      <pubDate>Sun, 07 Sep 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/digital-signal-processing/week-2/</guid>
+      <description>&lt;p&gt;This is where new content for the course starts. The purpose of this week was to understand autocorrelation, its properties, and its applicatiions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ECE440 Week 1: Introduction to Wireless Transmission</title>
+      <link>https://ausectj.com/learn/communications/wireless-transmission/week-1/</link>
+      <pubDate>Sun, 31 Aug 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/wireless-transmission/week-1/</guid>
+      <description>&lt;p&gt;An introduction to wireless transmission.&lt;/p&gt;&#xA;&lt;figure&gt;&lt;img src=&#34;https://ausectj.com/images/ECE440_Intro_System.png&#34;&#xA;    alt=&#34;System-level view of transmission systems&#34; width=&#34;500&#34;&gt;&#xA;&lt;/figure&gt;</description>
+    </item>
+    <item>
+      <title>ECE538 Week 1: Discrete Time Signals and Systems Basics</title>
+      <link>https://ausectj.com/learn/communications/digital-signal-processing/week-1/</link>
+      <pubDate>Sun, 31 Aug 2025 12:00:00 -0400</pubDate>
+      <guid>https://ausectj.com/learn/communications/digital-signal-processing/week-1/</guid>
+      <description>&lt;p&gt;The purpose of this week was to easily slide into the course material and work with convolution in the discrete time case.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Why I Made This Website</title>
+      <link>https://ausectj.com/posts/why-i-made-this-website/</link>
+      <pubDate>Sat, 21 Jun 2025 20:40:00 -0400</pubDate>
+      <guid>https://ausectj.com/posts/why-i-made-this-website/</guid>
+      <description>&lt;p&gt;I haven&amp;rsquo;t always wanted my own website. In fact, I was long convinced that&#xA;creating my own website would be a waste of time and effort. This article&#xA;documents the reasons why I took the jump.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

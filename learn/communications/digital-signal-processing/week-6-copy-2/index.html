@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ECE538 Week 6: CTFT and D/A Conversion</title>
+	
+	
+	<link rel="stylesheet" href="/css/style.css">
+	
+	
+    	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['$$', '$$']],  
+      inlineMath: [['$', '$']]                  
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+	
+</head>
+<body>
+	<header>
+	<nav>
+	
+			
+			<a href="/">Home</a>
+			
+			<a href="/learn">Learn</a>
+			
+			<a href="/posts">Posts</a>
+			
+			<a href="/projects">Projects</a>
+			
+	</nav>
+	
+	<hr>
+</header>
+
+	
+	<main>
+		<article>
+			<h1>ECE538 Week 6: CTFT and D/A Conversion</h1>
+			<time datetime="2025-10-05T12:00:00">05.10.2025 12:00</time>
+			<div>
+				<p>The purpose of this week is to revisit the continuous time fourier transform (CTFT) to prepare to understand sampling theory and digital to analog (D/A) conversion.</p>
+<h2 id="ctft">CTFT</h2>
+<h3 id="definition">Definition</h3>
+<p>The CTFT of a signal $x(t)$ is defined as follows:</p>
+$$X(f) = \int_{t=-\infty}^{\infty}x(t)e^{-j2\pi ft}dt$$<p>The inverse CTFT is given as:</p>
+$$x(t)=\int_{f=-\infty}^{\infty}X(f)e^{j2\pi ft}df$$<p>Some quick notes:</p>
+<ul>
+<li>Notice that we are not using the $X(jw)$ notation</li>
+<li>Notice that we are in Hz, not rad/s. Things are much prettier this way :)</li>
+</ul>
+<p><strong>Side note:</strong></p>
+<p>This can be viewed as a projection of $x(t)$ onto $e^{j2\pi ft}$ in a <a href="https://en.wikipedia.org/wiki/Hilbert_space">Hilbert space</a> with inner product $\langle x,y \rangle$ given as:</p>
+$$\langle x(t),y(t) \rangle=\int_{t=-\infty}^{\infty}x(t)y^*(t)dt$$<h3 id="properties">Properties</h3>
+<h4 id="duality">Duality</h4>
+<p>From the definition of the CTFT, we can immediately obtain the following relation:</p>
+$$x(t) \overset{\mathcal{F}}{\leftrightarrow} X(f) \iff X(t) \overset{\mathcal{F}}{\leftrightarrow} x(-f)$$<p>This is a useful property for obtaining many other properties.</p>
+<p><strong>Proof</strong></p>
+<p>Start with</p>
+$$X(f) = \int_{t=-\infty}^{\infty}x(t)e^{-j2\pi ft}dt \equiv x(t) \overset{\mathcal{F}}{\leftrightarrow} X(f)$$<p>Rewrite the fourier transform with $f=z$, $t=y$</p>
+$$X(z) = \int_{y=-\infty}^{\infty}x(y)e^{-j2\pi yz}dy$$<p>Now rewrite with $y = -f$ and $z = t$</p>
+$$X(t)=\int_{f=-\infty}^{\infty}x(-f)e^{j2\pi ft}df \equiv X(t) \overset{\mathcal{F}}{\leftrightarrow} x(-f)$$<p>This means that</p>
+$$x(t) \overset{\mathcal{F}}{\leftrightarrow} X(f) \iff X(t) \overset{\mathcal{F}}{\leftrightarrow} x(-f)$$$$\fbox{QED}$$<h4 id="linearity">Linearity</h4>
+<p>It&rsquo;s worth stating explicitly, but&hellip; duh&hellip;</p>
+$$a_1x_1(t)+a_2x_2(t) \overset{\mathcal{F}}{\leftrightarrow} a_1X_1(f)+a_2X_2(f)$$<h4 id="time-scaling">Time Scaling</h4>
+<p>This is a very useful property for conceptual understanding.</p>
+$$x(at) \overset{\mathcal{F}}{\leftrightarrow} \frac{1}{|a|}X(\frac{f}{a})$$<p>As you can see, if you scale a signal horizontally in the time domain, the opposite occurs in the frequency domain.</p>
+<p>This leads to a nice conceptual principle: $\fbox{The shorter the signal in time, the wider the signal in frequency.}$</p>
+<p>And by duality, vice a versa.</p>
+<h4 id="conjugation">Conjugation</h4>
+$$x^*(t) \overset{\mathcal{F}}{\leftrightarrow} X^*(-f)$$<h4 id="convolutionmultiplication">Convolution/Multiplication</h4>
+<p>This is our first dual pair of properties. This means that once one result is achieved, the other can easily be through duality.</p>
+$$x_1(t)*x_2(t) \overset{\mathcal{F}}{\leftrightarrow} X_1(f)X_2(f)$$<p>
+</p>
+$$x_1(t)\cdot x_2(t) \overset{\mathcal{F}}{\leftrightarrow} X_1(f)*X_2(f)$$<p><strong>Proof</strong></p>
+$$\mathcal{F}\{x_1(t)*x_2(t)\}=\mathcal{F}\{\int_{\lambda=-\infty}^{\infty}x_1(\lambda)x_2(t-\lambda)d\lambda\}=\int_{\lambda=-\infty}^{\infty}x_1(\lambda)\mathcal{F}\{x_2(t-\lambda)\}d\lambda$$$$\mathcal{F}\{x_2(t-\lambda)\}=\int_{t=-\infty}^{\infty}x_2(t-\lambda)e^{-j2\pi ft}dt$$<p>Let $u = t-\lambda$</p>
+$$\int_{t=-\infty}^{\infty}x_2(t-\lambda)e^{-j2\pi ft}dt = e^{-j2\pi f\lambda}\int_{u=-\infty}^{\infty}x_2(u)e^{-j2\pi fu}du = e^{-j2\pi f\lambda}X_2(f)$$<p>Thus</p>
+$$\int_{\lambda=-\infty}^{\infty}x_1(\lambda)\mathcal{F}\{x_2(t-\lambda)\}d\lambda=X_2(f)\int_{\lambda=-\infty}^{\infty}x_1(\lambda)e^{-j2\pi f\lambda}d\lambda = X_1(f)X_2(f)$$<p>Therefore</p>
+$$\mathcal{F}\{x_1(t)*x_2(t)\} = X_1(f)X_2(f)$$$$\fbox{QED pt 1}$$<p>By duality:</p>
+$$X_1(t)\cdot X_2(t) \overset{\mathcal{F}}{\leftrightarrow} \int_{\lambda=-\infty}^{\infty} x_1(\lambda)x_2(-f-\lambda)d\lambda$$<p>Let $\lambda = f - u$</p>
+$$\int_{\lambda=-\infty}^{\infty} x_1(\lambda)x_2(-f-\lambda)d\lambda = -\int_{u=\infty}^{-\infty} x_1(f - u)x_2(u)du$$<p>(at this point, we could invoke commutativity of convolution and be done with it. However, we can push to the end)</p>
+<p>Now let $u = f - v$</p>
+$$-\int_{u=\infty}^{-\infty} x_1(f - u)x_2(u)du = \int_{v=-\infty}^{\infty} x_1(v)x_2(f-v)dv = x_1(f)*x_2(f)$$<p>Therefore</p>
+$$\mathcal{F}\{x_1(t)x_2(t)\} = X_1(f)*X_2(f)$$$$\fbox{QED pt 2}$$<h4 id="complex-sinusoid--delta">Complex Sinusoid / Delta</h4>
+<p>A fundamental pair:</p>
+$$\delta(t-t_0) \overset{\mathcal{F}}{\leftrightarrow} e^{-j2\pi ft_0}$$<p>
+</p>
+$$e^{j2\pi f_ct} \overset{\mathcal{F}}{\leftrightarrow} \delta(f-f_c)$$<p><strong>Proof</strong></p>
+<p>Notice that we cannot attempt $\mathcal{F}\{e^{j2\pi f_ct}\}$ directly, as $e^{j2\pi f_ct}$ has infinite energy. However, we can take the other route and use duality to obtain the other.</p>
+$$\mathcal{F}\{\delta(t-t_0)\}=\int_{t=-\infty}^{\infty}\delta(t-t_0)e^{-j2\pi ft}dt=\int_{t=-\infty}^{\infty}\delta(t-t_0)e^{-j2\pi ft_0}dt=e^{-j2\pi ft_0}\int_{t=-\infty}^{\infty}\delta(t-t_0)dt=e^{-j2\pi ft_0}$$<p>Therefore,</p>
+$$\mathcal{F}\{\delta(t-t_0)\}=e^{-j2\pi ft_0}$$$$\fbox{QED pt 1}$$<p>Also notice</p>
+$$\mathcal{F}\{\delta(t+t_0)\}=e^{j2\pi ft_0}$$<p>By duality, ($f_c = t_0$)</p>
+$$\mathcal{F}\{e^{j2\pi f_ct}\}=\delta(-f+f_c)=\delta(f-f_c)$$$$\fbox{QED pt 2}$$<h4 id="timefrequency-shifting">Time/Frequency Shifting</h4>
+<p>The below properties can be derived with a combination of the convolution property and duality.</p>
+$$x(t)e^{j2\pi f_ct} \overset{\mathcal{F}}{\leftrightarrow} X(f-f_c)$$<p>
+</p>
+$$x(t-t_0) \overset{\mathcal{F}}{\leftrightarrow} X(f)e^{-j2\pi ft_0}$$
+			</div>
+			
+		</article>
+	</main>
+
+	<footer>
+	<p>&copy; 2025 <a href="http://localhost:1313/">Tim Ausec</a></p>
+</footer>
+
+</body>
+</html>
